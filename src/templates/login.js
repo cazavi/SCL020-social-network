@@ -38,7 +38,16 @@ function login() {
         <input type="email" placeholder="Usuario" />
         <input type="password" placeholder="Contraseña" />
         
-        <button> HOLA </button>
+        <button class="entrar"> Entrar </button>
+        <p>¿Aún no tienes una cuenta? Regístrate aquí </p>
+        <p>O ingresa con</p>
+        <button>
+          <img width="25" src="./assets/gmail.png" /> Gmail
+        </button>
+        <button>
+          <img width="25" src="./assets/facebook.png" /> Facebook
+        </button>
+
     </div>
 </div>`;
   const container = document.createElement("div");

@@ -46,6 +46,9 @@ body {
   background-size: cover;
   padding: 16px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .background-green {
@@ -81,4 +84,20 @@ body {
   width: 100%;
   margin-bottom: 16px;
   text-align: center;
+  border: 0px;
+}
+.login button{
+  border: 0px;
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.login .entrar{
+  background-color:#E48A7B;
+
 }
