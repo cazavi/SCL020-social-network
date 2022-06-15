@@ -5,7 +5,7 @@ function login() {
   const html =//html
     `
 <div class="background login">
-  <div class="group background-green">
+  <div class="background-green">
         <h1>PlantGram</h1>
         <p>Bienvenidos a la mayor comunidad de plant lovers</p>
         <h2>Inicia sesión</h2>
@@ -13,7 +13,7 @@ function login() {
         <input type="password" id="password" placeholder="Contraseña" />
         <p id="alertRegister"></p>
         
-        <button class="entrar" id="loginUser"> Entrar </button>
+        <button class="logInUser" id="loginUser"> Entrar </button>
         <p class="message">¿Aún no tienes una cuenta? <a href="#" id="register" class="btn-register">Regístrate aquí </a></p>
         <p>O ingresa con</p>
         <button id="logInButton">
