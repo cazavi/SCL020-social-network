@@ -1,34 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Ingrid+Darling:regular);
 @import url(https://fonts.googleapis.com/css?family=Kite+One:regular);
 
-/* a {
-  outline: none;
-  text-decoration: none;
-  padding: 2px 1px 0;
-}
-
-a:link {
-  color: #265301;
-}
-
-a:visited {
-  color: #437A16;
-}
-
-a:focus {
-  border-bottom: 1px solid;
-  background: #BAE498;
-}
-
-a:hover {
-  border-bottom: 1px solid;
-  background: #CDFEAA;
-}
-
-a:active {
-  background: #265301;
-  color: #CDFEAA;
-} */
 
 html,
 body {
@@ -55,7 +27,7 @@ body {
   height: 100vh;
   width: 100%;
   background-size: cover;
-  padding: 16px;
+  padding: 0;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -72,13 +44,13 @@ body {
   justify-content: center;
   align-items: center;
   align-content: center;
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   border-radius: 1rem;
-  margin-top: 2rem;
-  /* margin-left: 2rem; */
-  margin-bottom: 2rem;
-  /* margin-right: 2rem; */
-  width: 14rem;
+  margin-top: 0;
+  margin-left: 3rem;
+  margin-bottom: 0;
+  margin-right: 3rem;
+  width: 10rem;
   /* height: 30rem; */
 }
 
@@ -105,15 +77,10 @@ body {
   justify-content: center;
 }
 
-/* .login h2{
-  color: #BCE4D7;
-  font-size: 12px;
-  font-family:'Kite One', regular;
-} */
-
 .login p {
   color: #BCE4D7;
   font-family: 'Kite One', regular;
+  margin: 0;
 }
 
 .login input {
@@ -121,8 +88,8 @@ body {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   height: 43px;
-  width: 100%;
-  margin-bottom: 16px;
+  width: 70%;
+  margin-bottom: 10px;
   text-align: center;
   border: 0px;
 
@@ -130,17 +97,18 @@ body {
 
 .login button {
   border: 0px;
-  width: 100%;
+  width: 70%;
   height: 45px;
+  margin-top: 10px;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
 
-.login .entrar {
+.login .logInUser {
   background-color: #E48A7B;
 
 }
@@ -169,7 +137,7 @@ h2 {
   opacity: 1;
   display: flex;
   text-align: center;
-  color: #01474D;
+  color: #F8F9F9;
   font-size: 12px;
   font-family: 'Kite One', regular;
   width: 100%;
@@ -305,7 +273,7 @@ h2 {
   color: white;
 }
 
-/* NEWS */
+/* ACTIVE MENU */
 .bar {
   background-color: #01474D;
   color: #5F6C65;
@@ -330,27 +298,6 @@ h5 {
   
 }
 
-.news h2 {
-  color: #00A57A;
-  opacity: 1;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  font-size: 12px;
-  font-family: 'Kite One', regular;
-}
-
-.newsPost{
-  background-color: #BCE4D7;
-  display: grid;
-  grid-row: auto;
-  justify-content: center;
-  font-size: 12px;
-  font-family: 'Kite One', regular;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
 .postAction{
   display: flex;
   flex-direction: row;
@@ -491,22 +438,6 @@ hr {
   align-items: center;
 }
 
-/* Mis GRUPOs */
-.backgroundWhiteGroup {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.93)),
-    url('./assets/background.png');
-  /* backdrop-filter: opacity(0.3); */
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-  padding: 16px;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-.groups{
-  margin-top: 100px;
-}
 
 .copyright{
   position: absolute;
@@ -514,44 +445,6 @@ hr {
   width: 100%;
   text-align: center;
   font-size: 8px;
-}
-
-/* Lista de Grupos */
-.groups .groupsTitle{
-  text-align: center;
-  color: #00A57A;
-}
-.groups .groupsList{
-  margin: 0 auto;
-  padding: 0 16px;
-  max-width: 600px;
-}
-.groups .groupsList li{
-  background: #BCE4D7;
-  box-shadow: 0px 6px 6px -1px rgba(0, 0, 0, 0.25); 
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 16px;
-  align-items: center;
-  margin-bottom: 16px;
-
-}
-.groups .groupsList li p{
-  font-family: 'Kite One';
-  color: #02474E;
-  font-size: 15px;
-
-}
-.groups .groupsList li a{
-  font-family: 'Kite One'; 
-  text-decoration-line: underline;
-  color: #E28B7A;
-}
-
-.fa-thumbs-up {
-  color: #E28B7A;
-  padding: 8px;
 }
 
 .createPost{
@@ -562,9 +455,11 @@ hr {
 
 .postList{
   marker: none;
-  margin: 10px;
+  margin: 15px;
   padding: 10px;
   background-color: #BCE4D7;
+  width: 13rem;
+  height: 18rem;
   /* display: grid;
   grid-row: auto; */
   justify-content: center;
@@ -648,3 +543,102 @@ hr {
   width: 15px;
   height: 15px;
 }
+
+@media only screen and (min-width: 320px) {
+  .background-green{
+   width: 13rem;
+   height: 80vh;
+   padding-left:  2rem;
+  }
+  .postList{
+    width: 13rem;
+  }
+}
+
+@media only screen and (min-width: 350px){
+  .background-green{
+   width: 13rem;
+  }
+  .postList{
+    width: 16rem;
+  }
+}
+
+@media only screen and (min-width: 420px){
+  .background-green{
+    width: 15rem;
+  }
+  .postList{
+    width: 18rem;
+  }
+}
+
+@media only screen and (min-width: 540px){
+  .background-green{
+    width: 20rem;
+  }
+  .postList{
+    width: 25rem;
+  }
+}
+
+@media only screen and (min-width: 640px){
+  .background-green{
+    width: 30rem;
+  }
+  .postList{
+    width: 35rem;
+  }
+}
+
+@media only screen and (min-width: 720px){
+  .background-green{
+    width: 40rem;
+  }
+  .postList{
+    width: 38rem;
+  }
+}
+
+@media only screen and (min-width: 820px){
+  .background-green{
+    width: 60rem;
+  }
+  .postList{
+    width: 45rem;
+  }
+}
+
+@media only screen and (min-width: 920px){
+  .background-green{
+    width: 70rem;
+  }
+  .postList{
+    width: 48rem;
+  }
+}
+
+@media only screen and (min-width: 1080px){
+  .background-green{
+    width: 80rem;
+  }
+  .postList{
+    width: 65rem;
+  }
+}
+
+@media only screen and (min-width: 1290px){
+  .background-green{
+    width: 80rem;
+  }
+  .postList{
+    width: 70rem;
+  }
+}
+
+ /* @media (orientation:landscape){
+  .background-green{
+    width: 15rem;
+    height: 20rem;
+  }
+ } */
