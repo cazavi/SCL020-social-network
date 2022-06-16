@@ -24,6 +24,8 @@ import { getFirestore,
   updateDoc,
   serverTimestamp,
   deleteDoc,
+  query,
+  where
   } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
 
 import { firebaseConfig } from './config.js';
@@ -59,5 +61,7 @@ export {
   getAnalytics,
   getAuth,
   firebaseConfig, 
-  onAuthStateChanged
+  onAuthStateChanged,
+  query,
+  where
 };

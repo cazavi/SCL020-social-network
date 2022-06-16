@@ -1,10 +1,18 @@
-import { auth, firestore } from "../firebase/init.js";
-import { readData, createPost, editPost, time, deletePost } from "../firebase/store.js";
+import { auth, firestore, getAuth } from "../firebase/init.js";
+import {
+  readData,
+  createPost,
+  editPost,
+  time,
+  deletePost,
+  likePost
+} from "../firebase/store.js";
 import { navigate } from "../router/routes.js";
 import { signOutWithEmail } from "../firebase/auth.js";
 
 function publications() {
-  const html =//html
+  const html =
+    //html
     `
 <div class="background-white">
     <div class="bar">
@@ -34,7 +42,7 @@ function publications() {
 </div>`;
   const container = document.createElement("div");
   container.innerHTML = html;
-//  MENÚ ACTIVO
+  //  MENÚ ACTIVO
   const linkProfile = container.querySelector("#linkProfile");
   linkProfile.addEventListener("click", (event) => {
     event.preventDefault();
@@ -51,7 +59,7 @@ function publications() {
   signOut.addEventListener("click", async () => {
     try {
       await signOutWithEmail(auth);
-      navigate("login"); 
+      navigate("login");
     } catch (error) {
       throw error.message;
     }
@@ -59,19 +67,36 @@ function publications() {
 
   // POSTS
   const postList = container.querySelector(".createPost");
-  const setupPosts = async() => {
-    let data= await readData()
-    console.log(data);
-    if(data.length){
-      let html= '';
-      data.forEach(doc =>{ //html
-        const post = doc.data
+  const setupPosts = async () => {
+    let data = await readData(); 
+    if (data ) {
+      let html = ""; 
+      data.forEach((doc) => { 
+        // console.log(doc, 'doc')
+        const post = doc.data;
+        let activeLike = ''
+        if(doc.activeLike){
+          activeLike = `<img id="${doc.id}__like" width="28" src="./assets/like.png">`
+        }
+        else{
+          activeLike = `<img id="${doc.id}__like" width="28" src="./assets/dislike.png">`
+        }
+
+        let likes = doc.likes || 0;
         const ul = `
           <ul class="postList">
-            <h class="postTitle"> ${post.title} </h>
+            <h3 class="postTitle"> ${post.title} </h3>
             <p class="postBody"> ${post.description} </p>
             <button class="btnDeletePost" id="${doc.id}"><img class="deleteButton" src="../assets/delete.png"></button>
             <button class="btnUpdatePost"><img class="editButton" src="../assets/edit.png"></button>
+            <div class="postLikes">
+              <span>
+                ${likes}
+              </span>
+              <picture class="toggleLike"  id="${doc.id}">
+                ${activeLike}
+              </picture>
+            </div>
           </ul>
         `;
         html += ul;
@@ -79,38 +104,47 @@ function publications() {
       postList.innerHTML = html;
       const btnDeletePost = container.querySelectorAll(".btnDeletePost");
       console.log(btnDeletePost);
-  // if(btnDeletePost.length > 0){
-    btnDeletePost.forEach(btnDelete => {
-      console.log(btnDelete)
-      btnDelete.addEventListener("click", function(event) {
-        console.log(btnDelete.id)
-        deletePost(btnDelete.id); 
+      // if(btnDeletePost.length > 0){
+      btnDeletePost.forEach((btnDelete) => {
+        console.log(btnDelete);
+        btnDelete.addEventListener("click", function (event) {
+          console.log(btnDelete.id);
+          deletePost(btnDelete.id);
+        });
+      });
 
-      })
-  })
-// }
+      // LIKE FUNCTIONALITY
+      const toggleLike = container.querySelectorAll(".toggleLike");
+      toggleLike.forEach((child) => {
+        child.addEventListener("click", function () { 
+          likePost(this.id,  auth.currentUser.uid);
+          setupPosts(); 
+        });
+      });
+
+      // }
     } else {
-      postList.innerHTML = '<p>Ingresa para ver tus posts</p>';
+      postList.innerHTML = "<p>Ingresa para ver tus posts</p>";
     }
-    }
-  setupPosts()
+  };
+  setupPosts();
 
   const addPost = container.querySelector("#btnCreatePost");
-  if (addPost){
-    addPost.addEventListener("click", function() {
-    navigate("addPost")
-  })}
+  if (addPost) {
+    addPost.addEventListener("click", function () {
+      navigate("addPost");
+    });
+  }
 
   // const btnUpdatePost = container.querySelectorAll(".btnUpdatePost");
   // btnUpdatePost.forEach(btnUpdate => {
   //   btnUpdate.addEventListener("click", event => {
   //     event.preventDefault();
   //     console.log(dataset);
-  //     editPost(firebase, data.id); 
+  //     editPost(firebase, data.id);
   //   })
   // })
 
-
   return container;
-}; 
+}
 export { publications };

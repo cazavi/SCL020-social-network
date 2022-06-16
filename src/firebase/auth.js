@@ -112,6 +112,6 @@ const logIn = async function(){
 // });
 
 export {
-  logIn, redirectResult, createUser, onAuthStateChanged, signOutWithEmail, signIn
+  logIn, redirectResult, createUser, onAuthStateChanged, signOutWithEmail, signIn, getAuth
 };
 // getAuth, signIn, signOutWithEmail,
