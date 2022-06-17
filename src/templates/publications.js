@@ -87,9 +87,9 @@ function publications() {
           <ul class="postList">
             <h3 class="postTitle"> ${post.title} </h3>
             <p class="postBody"> ${post.description} </p>
-            <button class="btnDeletePost" id="${doc.id}"><img class="deleteButton" src="../assets/delete.png"></button>
-            <button class="btnUpdatePost"><img class="editButton" src="../assets/edit.png"></button>
             <div class="postLikes">
+            <button class="btnDeletePost" id="${doc.id}"><img class="deleteButton" src="../assets/delete.png"></button>
+              <button class="btnUpdatePost" id="${doc.id}"><img class="editButton" src="../assets/edit.png"></button>
               <span>
                 ${likes}
               </span>
