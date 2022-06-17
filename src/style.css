@@ -544,6 +544,11 @@ hr {
   height: 15px;
 }
 
+.toggleLike{
+  align-content: end;
+  justify-content: end;
+}
+
 @media only screen and (min-width: 320px) {
   .background-green{
    width: 13rem;

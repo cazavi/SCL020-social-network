@@ -38,7 +38,7 @@ const readData = async function () {
     }) 
 
     element.likes = likes;
-    if( id.includes(auth.currentUser.uid)){
+    if(id.includes(auth.currentUser.uid)){
       element.activeLike = true
     }
     else{
@@ -116,7 +116,7 @@ const time = async (timestamp) => {
 const deletePost = async (id) => {
   try {
     await deleteDoc(doc(firestore, "Posts", id));
-    console.log("chan chan");
+    console.log("Doc deleted");
   } catch (error) {
     console.log(error);
     throw error.message;
