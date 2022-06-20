@@ -3,16 +3,16 @@ import {
   readData,
   createPost,
   editPost,
+  getPost,
   time,
   deletePost,
-  likePost
+  likePost,
 } from "../firebase/store.js";
 import { navigate } from "../router/routes.js";
 import { signOutWithEmail } from "../firebase/auth.js";
 
 function publications() {
-  const html =
-    //html
+  const html =                                                                                                                                                                                                                                                                                                                                          //html
     `
 <div class="background-white">
     <div class="bar">
@@ -68,28 +68,27 @@ function publications() {
   // POSTS
   const postList = container.querySelector(".createPost");
   const setupPosts = async () => {
-    let data = await readData(); 
-    if (data ) {
-      let html = ""; 
-      data.forEach((doc) => { 
-        // console.log(doc, 'doc')
+    let data = await readData();
+    if (data) {
+      let html = "";
+      data.forEach((doc) => {
         const post = doc.data;
-        let activeLike = ''
-        if(doc.activeLike){
-          activeLike = `<img id="${doc.id}__like" width="28" src="./assets/like.png">`
-        }
-        else{
-          activeLike = `<img id="${doc.id}__like" width="28" src="./assets/dislike.png">`
+        let activeLike = "";
+        if (doc.activeLike) {
+          activeLike = `<img id="${doc.id}__like" width="28" src="./assets/like.png">`;
+        } else {
+          activeLike = `<img id="${doc.id}__like" width="28" src="./assets/dislike.png">`;
         }
 
         let likes = doc.likes || 0;
-        const ul = `
+        const ul =//html
+          `
           <ul class="postList">
             <h3 class="postTitle"> ${post.title} </h3>
             <p class="postBody"> ${post.description} </p>
-            <button class="btnDeletePost" id="${doc.id}"><img class="deleteButton" src="../assets/delete.png"></button>
-            <button class="btnUpdatePost"><img class="editButton" src="../assets/edit.png"></button>
             <div class="postLikes">
+            <button class="btnDeletePost" id="${doc.id}"><img class="deleteButton" src="../assets/delete.png"></button>
+            <button class="btnUpdatePost" id="${doc.id}"><img class="editButton" src="../assets/edit.png"></button>
               <span>
                 ${likes}
               </span>
@@ -103,26 +102,32 @@ function publications() {
       });
       postList.innerHTML = html;
       const btnDeletePost = container.querySelectorAll(".btnDeletePost");
-      console.log(btnDeletePost);
-      // if(btnDeletePost.length > 0){
+      // console.log(btnDeletePost);
       btnDeletePost.forEach((btnDelete) => {
-        console.log(btnDelete);
+        // console.log(btnDelete);
         btnDelete.addEventListener("click", function (event) {
-          console.log(btnDelete.id);
+          // console.log(btnDelete.id);
           deletePost(btnDelete.id);
         });
       });
 
+      const btnUpdatePost = container.querySelectorAll(".btnUpdatePost");
+      btnUpdatePost.forEach((btnUpdate) => {
+        btnUpdate.addEventListener("click", function (event) {
+          let btnUpdate = window.location.pathname;
+          if(btnUpdate){
+            navigate("updatePost");
+              }
+            })
+          });
       // LIKE FUNCTIONALITY
       const toggleLike = container.querySelectorAll(".toggleLike");
       toggleLike.forEach((child) => {
-        child.addEventListener("click", function () { 
-          likePost(this.id,  auth.currentUser.uid);
-          setupPosts(); 
+        child.addEventListener("click", function () {
+          likePost(this.id, auth.currentUser.uid);
+          setupPosts();
         });
       });
-
-      // }
     } else {
       postList.innerHTML = "<p>Ingresa para ver tus posts</p>";
     }
@@ -135,15 +140,6 @@ function publications() {
       navigate("addPost");
     });
   }
-
-  // const btnUpdatePost = container.querySelectorAll(".btnUpdatePost");
-  // btnUpdatePost.forEach(btnUpdate => {
-  //   btnUpdate.addEventListener("click", event => {
-  //     event.preventDefault();
-  //     console.log(dataset);
-  //     editPost(firebase, data.id);
-  //   })
-  // })
 
   return container;
 }

@@ -17,9 +17,6 @@ import {
 
 } from "./init.js";
 
-// const docRef = doc(firestore, "cities", "SF");
-// const docSnap = await getDoc(docRef);
-
 const readData = async function () {
   let dataArray = [];
   const querySnapshot = await getDocs(collection(firestore, "Posts"));
@@ -36,16 +33,13 @@ const readData = async function () {
       id.push(child.id)
       likes += Object.values(child.data()).length;
     }) 
-
     element.likes = likes;
-    if( id.includes(auth.currentUser.uid)){
+    if(id.includes(auth.currentUser.uid)){
       element.activeLike = true
     }
     else{
       element.activeLike = false
     }
-
-    
   } 
   console.log('lista', dataArray)
   return dataArray;
@@ -78,19 +72,26 @@ const docData = {
 
 // Add a new document with a generated id.
 const createPost = async (title, description) => {
-  console.log("ingresé");
+  console.log("creando post");
   const docRef = await addDoc(collection(firestore, "Posts"), {
     title: title,
     description: description,
   });
   console.log("Document written with ID: ", docRef.id);
 };
+// obtener el post que se va a editar
+const getPost = async (id) => {
+  const docRef = doc(firestore, 'Posts', id);
+  const postResult = await getDoc(docRef);
+  return postResult.data();
+}                                                                                                                                                                                                         
 
-// Set the "capital" field of the city 'DC'-DOC UPDATE
-const editPost = async (title, description) => {
+// editar el post que se va a editar
+const editPost = async (id, title, description) => {
+  const docRef = doc(firestore, 'Posts', id)
   await updateDoc(docRef, {
-    title: true,
-    description: true,
+    title,
+    description,
   });
 };
 
@@ -102,21 +103,10 @@ const time = async (timestamp) => {
 };
 
 //DELETE POST
-
-// const deletePost = async function (id) {
-//   // const querySnapshot = await getDoc(doc.id);
-//   // querySnapshot((doc) => {
-//   //   doc.deleteDoc(doc(firestore, "Posts", "id"));
-//   // });
-//   const deleteRef = await doc(firestore, "Posts", id);
-//   await deleteDoc(deleteRef);
-//   // return dataArray;
-// };
-
 const deletePost = async (id) => {
   try {
     await deleteDoc(doc(firestore, "Posts", id));
-    console.log("chan chan");
+    console.log("post eliminado");
   } catch (error) {
     console.log(error);
     throw error.message;
@@ -140,7 +130,6 @@ const likePost = async (id, idUser) => {
       const likeRef = await setDoc(collectionRef, { id: idUser });
       document.getElementById(`${id}__like`).src = "./assets/like.png";
     }
- 
   } catch (e) {
     throw e.message;
   }
@@ -150,6 +139,7 @@ export {
   readData,
   savedUser,
   createPost,
+  getPost,
   editPost,
   time,
   deletePost,

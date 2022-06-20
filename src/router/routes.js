@@ -3,6 +3,7 @@ import { profile } from '../templates/profile.js';
 import { register } from '../templates/register.js';
 import { publications } from '../templates/publications.js'; 
 import { addPost } from '../templates/addPost.js';
+import { updatePost } from '../templates/updatePost.js';
 
 const routes = {
   login: {
@@ -24,6 +25,10 @@ const routes = {
   addPost: {
     path: '/addPost',
     template: addPost(),
+  },
+  updatePost: {
+    path: '/updatePost',
+    template: updatePost(),
   }
 };
 
