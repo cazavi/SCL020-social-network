@@ -106,7 +106,7 @@ const time = async (timestamp) => {
 const deletePost = async (id) => {
   try {
     await deleteDoc(doc(firestore, "Posts", id));
-    console.log("post eliminado");
+    console.log("Doc deleted");
   } catch (error) {
     console.log(error);
     throw error.message;
