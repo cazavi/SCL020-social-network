@@ -34,7 +34,6 @@ initializeApp(firebaseConfig);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 const firestore = getFirestore()
-// signInWithRedirect(auth, provider);
 
 export {
   createUserWithEmailAndPassword,
