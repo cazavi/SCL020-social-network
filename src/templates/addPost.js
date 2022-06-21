@@ -85,8 +85,10 @@ function addPost() {
       const title = container.querySelector("#newPostTitle").value;
       const description = container.querySelector("#newPostDescription").value;
       if (title && description) {
-        createPost(title, description);
-        navigate("publications"); 
+        createPost(title, description); 
+        setTimeout( () =>{
+          window.location.href = "/publications"
+        }, 1000)
       } else if(!title) {
         alert('Debe ingresar un título para el post');
       } else if(!description){

@@ -4,6 +4,7 @@ import { navigate } from "../router/routes.js";
 import { signOutWithEmail } from "../firebase/auth.js";
 
 function updatePost() {
+  
   const html =//html
     `
 <div class="background-white">
@@ -62,25 +63,52 @@ function updatePost() {
     let post = '';
         const ul = `
           <ul class="editPost">
-            <input class="postTitle" id="${window.location.pathname}"> ${post.title}</input>
-            <textarea class="postBody" id="${window.location.pathname}">${post.description}</textarea>
+            <input class="postTitle" id="postTitle" />
+            <textarea class="postBody" id="postBody"></textarea>
           </ul>
         `;
         post += ul;
       updatePost.innerHTML = post;
-    }
-  updatePosts()
+  }
+
+  const getPostId = async () =>{
+    // Obtengo el parametro de la url :ID
+    let substr =  window.location.search.substr(1);
+    let id = substr.split("=")[1];
+    // Llamo a mi funcion get de Firebase
+    const data = await getPost(id);
+    console.log('data', data);
+
+    // Llamo los IDs de los inputs
+    const title = document.getElementById("postTitle");
+    const postBody = document.getElementById("postBody");
+
+    // Agrego la informacion
+    title.value = data.title;
+    postBody.value = data.description;
+  }
+  updatePosts();
+  getPostId();
 
   const updateListPost = container.querySelector("#addUpdatePost");
-  if (updatePost){
+  if (updateListPost){
     updateListPost.addEventListener("click", function() {
-      const title = container.querySelector(".postTitle");
-      const description = container.querySelector(".postBody");
+      const title = container.querySelector("#postTitle").value;
+      const description = container.querySelector("#postBody").value;
+      
+      // Obtengo el parametro de la url :ID
+      let substr =  window.location.search.substr(1);
+      let id = substr.split("=")[1];
+
       if (title || description) {
-        editPost(title, description);
-        navigate("publications"); 
+        editPost(id, title, description);
+        // navigate("publications"); 
+        setTimeout( () =>{
+          window.location.href = "/publications"
+        }, 1000)
       } 
-  })}
+    })
+  }
 
   return container;
 }; 
