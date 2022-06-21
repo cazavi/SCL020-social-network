@@ -74,6 +74,7 @@ function publications() {
       data.forEach((doc) => {
         const post = doc.data;
         let activeLike = "";
+        let imageTemp = "https://st.depositphotos.com/1743476/1262/i/450/depositphotos_12621249-stock-photo-new-life.jpg"
         if (doc.activeLike) {
           activeLike = `<img id="${doc.id}__like" width="28" src="./assets/like.png">`;
         } else {
@@ -86,9 +87,10 @@ function publications() {
           <ul class="postList">
             <h3 class="postTitle"> ${post.title} </h3>
             <p class="postBody"> ${post.description} </p>
+            <img width="200" src="${post.image ? post.image : imageTemp}">
             <div class="postLikes">
             <button class="btnDeletePost" id="${doc.id}"><img class="deleteButton" src="../assets/delete.png"></button>
-            <button class="btnUpdatePost" id="${doc.id}"><img class="editButton" src="../assets/edit.png"></button>
+            <a class="btnUpdatePost" id="${doc.id}" href="/updatePost?id=${doc.id}"><img class="editButton" src="../assets/edit.png"></a>
               <span>
                 ${likes}
               </span>

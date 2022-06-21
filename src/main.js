@@ -3,7 +3,7 @@
 import { navigate } from "./router/routes.js";
 
 // navigate("login");
- 
+  
 const path = window.location.pathname;
 switch (path) {
   case "/":
@@ -17,6 +17,10 @@ switch (path) {
     break;
   case "/addPost":
     navigate("addPost");
+    break; 
+  case "/updatePost":
+    let substr =  window.location.search.substr(1)
+    navigate("updatePost", substr);
     break; 
   default:
     navigate("login");

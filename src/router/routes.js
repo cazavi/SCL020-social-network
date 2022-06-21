@@ -28,14 +28,15 @@ const routes = {
   },
   updatePost: {
     path: '/updatePost',
+    dinamic: true,
     template: updatePost(),
   }
 };
 
-function navigate(route) {
+function navigate(route, substr = "") {
   const template = routes[route].template;
-  const path = routes[route].path;
-  history.pushState({}, route, path);
+  const path = routes[route].path; 
+  history.pushState({}, route, `${path}?${substr}`);
   const root = document.getElementById('root');
   root.innerHTML = ' ';
   root.appendChild(template);
