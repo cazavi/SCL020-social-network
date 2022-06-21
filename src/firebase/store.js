@@ -34,7 +34,7 @@ const readData = async function () {
       likes += Object.values(child.data()).length;
     }) 
     element.likes = likes;
-    if(id.includes(auth.currentUser.uid)){
+    if(id.includes(auth.currentUser.idUser)){
       element.activeLike = true
     }
     else{

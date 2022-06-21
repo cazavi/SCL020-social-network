@@ -55,3 +55,7 @@ Ver prototipo con interacciones [aquí](https://www.figma.com/proto/oGMhwqudUs2Y
 * Logramos crear el login con email y contraseña.
 * Logramos reservar el usuario mientras se está en la app.
 * Agregamos el log out con su botón correspondiente.
+* Pudimos añadir la función para crear post, redirigiendo a otro template.
+* Añadimos la función de eliminar post, donde posteriormente lo metimos en un modal donde se pida la confirmación de borrado.
+* Comenzamos con trabajo de test y mocks.
+* Añadimos otro template para redirigir el edit posts.
