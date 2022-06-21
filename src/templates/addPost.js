@@ -67,8 +67,6 @@ function addPost() {
           <ul class="newPostList"> 
             <label>Ingresa el título de post</label>
             <input id="newPostTitle"/>
-            <label>Pega la url de tu foto aquí</label>
-            <input id="newPostImage"/>
             <label>Escribe el contenido de tu post aquí</label>
             <textarea id="newPostDescription"></textarea>
           </ul>
