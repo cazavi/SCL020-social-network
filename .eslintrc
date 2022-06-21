@@ -18,7 +18,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "linebreak-style": 1,
+    "linebreak-style": 0,
     "prefer-destructuring": 0,
     "import/extensions": 0,
     "import/prefer-default-export": 0,
@@ -27,9 +27,9 @@
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
-    "avoidEscape": true,
-    "allowTemplateLiterals": true,
-    "overrides": true,
-    "windows": "\r\n"
+    "avoidEscape": 0,
+    "allowTemplateLiterals": 0,
+    "overrides": 0,
+    "windows": 0
   }
 }
