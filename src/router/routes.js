@@ -40,7 +40,6 @@ function navigate(route, substr = "") {
   const root = document.getElementById('root');
   root.innerHTML = ' ';
   root.appendChild(template);
-  // console.log(template);
 }
 
 export { navigate };

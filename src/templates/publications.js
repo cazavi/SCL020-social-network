@@ -1,10 +1,6 @@
-import { auth, firestore, getAuth } from "../firebase/init.js";
+import { auth } from "../firebase/init.js";
 import {
   readData,
-  createPost,
-  editPost,
-  getPost,
-  time,
   deletePost,
   likePost,
 } from "../firebase/store.js";
@@ -42,7 +38,7 @@ function publications() {
 </div>`;
   const container = document.createElement("div");
   container.innerHTML = html;
-  //  MENÚ ACTIVO
+  //  ACTIVE MENU
   const linkProfile = container.querySelector("#linkProfile");
   linkProfile.addEventListener("click", (event) => {
     event.preventDefault();
@@ -53,7 +49,6 @@ function publications() {
     event.preventDefault();
     navigate("publications");
   });
-
   //SIGN OUT WITH EMAIL
   const signOut = container.querySelector("#signOut");
   signOut.addEventListener("click", async () => {
@@ -64,8 +59,7 @@ function publications() {
       throw error.message;
     }
   });
-
-  // POSTS
+  // DISPLAY POSTS WITH LIKES
   const postList = container.querySelector(".createPost");
   const setupPosts = async () => {
     let data = await readData();
@@ -104,15 +98,12 @@ function publications() {
       });
       postList.innerHTML = html;
       const btnDeletePost = container.querySelectorAll(".btnDeletePost");
-      // console.log(btnDeletePost);
       btnDeletePost.forEach((btnDelete) => {
-        // console.log(btnDelete);
         btnDelete.addEventListener("click", function (event) {
-          // console.log(btnDelete.id);
           deletePost(btnDelete.id);
         });
       });
-
+      // BUTTON UPDATE
       const btnUpdatePost = container.querySelectorAll(".btnUpdatePost");
       btnUpdatePost.forEach((btnUpdate) => {
         btnUpdate.addEventListener("click", function (event) {
@@ -122,7 +113,7 @@ function publications() {
               }
             })
           });
-      // LIKE FUNCTIONALITY
+      // BUTTON LIKE FUNCTIONALITY
       const toggleLike = container.querySelectorAll(".toggleLike");
       toggleLike.forEach((child) => {
         child.addEventListener("click", function () {
@@ -135,14 +126,13 @@ function publications() {
     }
   };
   setupPosts();
-
+  // BUTTON ADD NEW POST
   const addPost = container.querySelector("#btnCreatePost");
   if (addPost) {
     addPost.addEventListener("click", function () {
       navigate("addPost");
     });
   }
-
   return container;
 }
 export { publications };

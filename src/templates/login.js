@@ -38,8 +38,7 @@ function login() {
       await signIn(email, password);
       navigate("publications");
     } catch (error) {
-      console.log(error);
-      // throw error.message;
+      console.log(error); // --- AGREGAR MODALES ---
       const alertError = container.querySelector("#alertRegister");
       console.log(error);
       if(error.includes('auth/email-already-in-use')){
@@ -64,7 +63,6 @@ function login() {
       navigate("publications");
     } catch (error) {
       throw error.message;
-      console.log(error);
     }
   });
   redirectResult();

@@ -1,10 +1,12 @@
-import { auth, firestore } from "../firebase/init.js";
-import { readData, createPost, editPost, time, deletePost, getPost } from "../firebase/store.js";
+import { auth } from "../firebase/init.js";
+import {
+  editPost,
+  getPost,
+} from "../firebase/store.js";
 import { navigate } from "../router/routes.js";
 import { signOutWithEmail } from "../firebase/auth.js";
 
 function updatePost() {
-  
   const html =//html
     `
 <div class="background-white">
@@ -34,7 +36,7 @@ function updatePost() {
 </div>`;
   const container = document.createElement("div");
   container.innerHTML = html;
-//  MENÚ ACTIVO
+  //  ACTIVE MENU
   const linkProfile = container.querySelector("#linkProfile");
   linkProfile.addEventListener("click", (event) => {
     event.preventDefault();
@@ -51,66 +53,62 @@ function updatePost() {
   signOut.addEventListener("click", async () => {
     try {
       await signOutWithEmail(auth);
-      navigate("login"); 
+      navigate("login");
     } catch (error) {
       throw error.message;
     }
   });
 
-  // EDIT POSTS
+  // EDIT POSTS TEMPLATE 
   const updatePost = container.querySelector(".updatePost");
-  const updatePosts = async() => {
-    let post = '';
-        const ul = `
+  const updatePosts = async () => {
+    let post = "";
+    const ul =// html
+      `
           <ul class="editPost">
             <input class="postTitle" id="postTitle" />
             <textarea class="postBody" id="postBody"></textarea>
           </ul>
         `;
-        post += ul;
-      updatePost.innerHTML = post;
-  }
+    post += ul;
+    updatePost.innerHTML = post;
+  };
 
-  const getPostId = async () =>{
-    // Obtengo el parametro de la url :ID
-    let substr =  window.location.search.substr(1);
+  // GET POST BY ID TO EDIT
+  const getPostId = async () => {
+    // Obtengo el parámetro de la url :ID
+    let substr = window.location.search.substr(1);
     let id = substr.split("=")[1];
-    // Llamo a mi funcion get de Firebase
+    // Llamo a mi función get de Firebase
     const data = await getPost(id);
-    console.log('data', data);
-
+    console.log("data", data);
     // Llamo los IDs de los inputs
     const title = document.getElementById("postTitle");
     const postBody = document.getElementById("postBody");
-
-    // Agrego la informacion
+    // Agrego la información
     title.value = data.title;
     postBody.value = data.description;
-  }
+  };
   updatePosts();
   getPostId();
-
+// UPDATE POST 
   const updateListPost = container.querySelector("#addUpdatePost");
-  if (updateListPost){
-    updateListPost.addEventListener("click", function() {
+  if (updateListPost) {
+    updateListPost.addEventListener("click", function () {
       const title = container.querySelector("#postTitle").value;
       const description = container.querySelector("#postBody").value;
-      
-      // Obtengo el parametro de la url :ID
-      let substr =  window.location.search.substr(1);
+      // Obtengo el parámetro de la url :ID
+      let substr = window.location.search.substr(1);
       let id = substr.split("=")[1];
-
       if (title || description) {
         editPost(id, title, description);
-        // navigate("publications"); 
-        setTimeout( () =>{
-          window.location.href = "/publications"
-        }, 1000)
-      } 
-    })
+        // navigate("publications");
+        setTimeout(() => {
+          window.location.href = "/publications";
+        }, 1000);
+      }
+    });
   }
-
   return container;
-}; 
+}
 export { updatePost };
-
