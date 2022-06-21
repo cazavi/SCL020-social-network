@@ -1,5 +1,5 @@
-import { auth, firestore } from "../firebase/init.js";
-import { readData, createPost, editPost, time, deletePost } from "../firebase/store.js";
+import { auth } from "../firebase/init.js";
+import { createPost } from "../firebase/store.js";
 import { navigate } from "../router/routes.js";
 import { signOutWithEmail } from "../firebase/auth.js";
 
@@ -34,7 +34,7 @@ function addPost() {
 </div>`;
   const container = document.createElement("div");
   container.innerHTML = html;
-//  MENÚ ACTIVO
+//  ACTIVE MENU
   const linkProfile = container.querySelector("#linkProfile");
   linkProfile.addEventListener("click", (event) => {
     event.preventDefault();
@@ -56,26 +56,26 @@ function addPost() {
       throw error.message;
     }
   });
-
-  // POSTS
+  // CREATE NEW POST
   const writePost = container.querySelector(".newPost");
   const setupPosts = async() => {
     // let post= await createPost()
     // console.log(data);
       let html= '';
-      // post.forEach(doc =>{
-      //   const lastPost = doc.post
-        const ul = `
-          <ul class="newPostList"> Ingresa título
-            <input id="newPostTitle"> </input>
-            <textarea id="newPostDescription"> Ingresa descripción </textarea>
+        const ul = //html 
+        `
+          <ul class="newPostList"> 
+            <label>Ingresa el título de post</label>
+            <input id="newPostTitle"/>
+            <label>Pega la url de tu foto aquí</label>
+            <input id="newPostImage"/>
+            <label>Escribe el contenido de tu post aquí</label>
+            <textarea id="newPostDescription"></textarea>
           </ul>
         `;
         html += ul;
-      // });
       writePost.innerHTML = html;
     }
-    
   setupPosts()
   
 
