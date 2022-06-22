@@ -69,34 +69,34 @@ function publications() {
         let activeLike = '';
         const imageTemp = 'https://st.depositphotos.com/1743476/1262/i/450/depositphotos_12621249-stock-photo-new-life.jpg';
         if (doc.activeLike) {
-          activeLike = `<img id="${doc.id}__like" width="28" src="./assets/like.png">`;
+          activeLike = `<img id="${doc.id}__like" width="25" src="./assets/like.png">`;
         } else {
-          activeLike = `<img id="${doc.id}__like" width="28" src="./assets/dislike.png">`;
+          activeLike = `<img id="${doc.id}__like" width="25" src="./assets/dislike.png">`;
         }
 
         const likes = doc.likes || 0;
         const ul =
           // html
           `
-          <ul class="postList">
+          <div class="postList">
             <h3 class="postTitle"> ${post.title} </h3>
             <p class="postBody"> ${post.description} </p>
-            <img width="200" src="${post.image ? post.image : imageTemp}">
+            <img width="400" src="${post.image ? post.image : imageTemp}">
             <div class="postLikes">
-            <button class="open-modal" data-open="modal1"><img class="deleteButton" src="../assets/delete.png"></button>
+            
             <div class="modal" data-animation="modalAnimation" id="modal1">
-            <div class="modal-dialog">
-              <header class="modal-header">
-              ELIMINAR POST
-              </header>
-              <section class="modal-content">¿De verdad quieres eliminar este post?</section>
-              <footer class="modal-footer">
-              <button class="btnDeletePost" id="${doc.id}">Eliminar</button>
-              <button class="close-modal" aria-label="close modal" data-close>Cancelar</button>
-              </footer>
-            </div>
-            </div>
-            <a class="btnUpdatePost" id="${doc.id}" href="/updatePost?id=${doc.id}"><img class="editButton" src="../assets/edit.png"></a>
+              <div class="modal-dialog">
+                <header class="modal-header">
+                ELIMINAR POST
+                </header>
+                <section class="modal-content">¿De verdad quieres eliminar este post?</section>
+                <footer class="modal-footer">
+                <button class="btnDeletePost" id="${doc.id}">Eliminar</button>
+                <button class="close-modal" aria-label="close modal" data-close>Cancelar</button>
+                </footer>
+              </div>
+            </div> 
+            <div class="like"> 
               <span>
                 ${likes}
               </span>
@@ -104,7 +104,10 @@ function publications() {
                 ${activeLike}
               </picture>
             </div>
-          </ul>
+            <a class="btnUpdatePost" id="${doc.id}" href="/updatePost?id=${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
+            <button  class="open-modal btnDeletePost" data-open="modal1" class="btnDeletePost" id="${doc.id}"><img width="20" class="deleteButton" src="../assets/delete.png"></button>
+            </div>
+          </div>
         `;
         html += ul;
       });
