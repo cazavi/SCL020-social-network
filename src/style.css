@@ -511,28 +511,29 @@ hr {
 }
 
 .newPostList{
-  display: grid;
+  /* display: grid; */
   grid-row: auto;
   justify-content: center;
   background-color: #BCE4D7;
   font-family: 'Kite One', regular;
   font-size: 12px;
+  padding: 15px;
 }
 
 #newPostTitle{
   justify-content:center;
-  width: 200px;
-  height: 20px;
-  margin: 10px;
+  /* width: 200px; */
+  /* height: 20px; */
+  /* margin: 10px; */
   font-family: 'Kite One', regular;
   font-size: 12px;
 }
 
 #newPostDescription{
   justify-content:center;
-  width: 200px;
+  /* width: 200px;
   height: 200px;
-  margin: 10px;
+  margin: 10px; */
   font-family: 'Kite One', regular;
   font-size: 12px;
 }
@@ -692,6 +693,51 @@ hr {
   cursor: pointer;
   border-radius: 5px;
  }
+ .updatePost{
+  padding: 1rem;
+  border-radius: 5px;
+ }
+.updatePost .editPost{
+
+}
+.updatePost .editPost input,
+.newPost  input{
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  border: none;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+.updatePost .editPost textarea,
+.newPost textarea{
+  width: 100%;
+  height: 250px;
+  border-radius: 5px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  border: none;
+  resize: none;
+  background-color: #fff;
+
+}
+#addUpdatePost, #addNewPost{
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  margin-top: 15px;
+  background-color: #E48A7B;
+  border: 0px;
+}
+.newPost label,
+.updatePost label{
+  text-align: left;
+  display: block;
+  margin-bottom: 10px;
+}
+
 .modal { 
   position: fixed;
   top: 0;

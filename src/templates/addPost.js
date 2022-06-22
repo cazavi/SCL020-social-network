@@ -64,12 +64,12 @@ function addPost() {
       let html= '';
         const ul = //html 
         `
-          <ul class="newPostList"> 
+          <div class="newPostList"> 
             <label>Ingresa el título de post</label>
             <input id="newPostTitle"/>
             <label>Escribe el contenido de tu post aquí</label>
             <textarea id="newPostDescription"></textarea>
-          </ul>
+          </div>
         `;
         html += ul;
       writePost.innerHTML = html;
