@@ -771,3 +771,11 @@ hr {
   width: 80px;
   border-radius: 5px;
 }
+
+#alertLogin, #alertRegister{
+  background-color:#BCE4D7;
+  color: black;
+  font-weight: bold;
+  margin: 8px;
+  border-radius: 5px;
+}

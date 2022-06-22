@@ -31,11 +31,11 @@ function register() {
     try {
       await createUser(auth, email, password);
       navigate("publications"); 
-    } catch (error) { // --- FALTA CAMBIAR ALERTAS POR MODALES ---
+    } catch (error) { 
       const alertError = container.querySelector("#alertRegister");
       console.log(error);
       if(error.includes('auth/email-already-in-use')){
-        alertError.innerHTML = '¡Este usuario ya ha sido registrado, prueba con otro correo!';
+        alertError.innerHTML = '¡El usuario ya ha sido registrado, prueba con otro correo!';
       } else if(error.includes('auth/invalid-email')){
         alertError.innerHTML = '¡Ingresa un correo válido!';
       } else if(error.includes('auth/weak-password')){

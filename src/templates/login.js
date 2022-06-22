@@ -11,7 +11,7 @@ function login() {
         <h2>Inicia sesión</h2>
         <input type="email" id="email" placeholder="Correo electrónico" />
         <input type="password" id="password" placeholder="Contraseña" />
-        <p id="alertRegister"></p>
+        <p id="alertLogin"></p>
         
         <button class="logInUser" id="loginUser"> Entrar </button>
         <p class="message">¿Aún no tienes una cuenta? <a href="#" id="register" class="btn-register">Regístrate aquí </a></p>
@@ -38,8 +38,8 @@ function login() {
       await signIn(email, password);
       navigate("publications");
     } catch (error) {
-      console.log(error); // --- AGREGAR MODALES ---
-      const alertError = container.querySelector("#alertRegister");
+      console.log(error); 
+      const alertError = container.querySelector("#alertLogin");
       console.log(error);
       if(error.includes('auth/email-already-in-use')){
         alertError.innerHTML = '¡Este usuario ya ha sido registrado, prueba con otro correo!';

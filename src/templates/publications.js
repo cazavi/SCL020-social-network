@@ -73,10 +73,8 @@ function publications() {
         } else {
           activeLike = `<img id="${doc.id}__like" width="25" src="./assets/dislike.png">`;
         }
-
         const likes = doc.likes || 0;
-        const ul =
-          // html
+        const ul =// html
           `
           <div class="postList">
             <h3 class="postTitle"> ${post.title} </h3>
