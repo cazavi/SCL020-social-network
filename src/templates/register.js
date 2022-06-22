@@ -23,17 +23,15 @@ function register() {
   event.preventDefault();
   navigate("login");
   });
-  //registro de usuario --- me falta guardar el user en savedUser 
+  // USER REGISTER
   const btnCreateAccount = container.querySelector("#createAccount");
   btnCreateAccount.addEventListener("click", async () => {
     const email = container.querySelector("#email").value;
     const password = container.querySelector("#password").value;
-    console.log(email, password);
     try {
       await createUser(auth, email, password);
-      // console.log(auth, email, password);
       navigate("publications"); 
-    } catch (error) {
+    } catch (error) { // --- FALTA CAMBIAR ALERTAS POR MODALES ---
       const alertError = container.querySelector("#alertRegister");
       console.log(error);
       if(error.includes('auth/email-already-in-use')){
