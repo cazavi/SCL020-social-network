@@ -81,9 +81,14 @@ const createPost = async (title, description) => {
 };
 // obtener el post que se va a editar
 const getPost = async (id) => {
-  const docRef = doc(firestore, 'Posts', id);
-  const postResult = await getDoc(docRef);
-  return postResult.data();
+  try {
+    const docRef = doc(firestore, 'Posts', id);
+    const postResult = await getDoc(docRef);
+    return postResult.data();
+  } catch (error) {
+    throw error.message;
+  }
+
 }                                                                                                                                                                                                         
 
 // editar el post que se va a editar
@@ -112,6 +117,7 @@ const deletePost = async (id) => {
     throw error.message;
   }
 };
+
 
 const likePost = async (id, idUser) => { 
   // Busca el like
