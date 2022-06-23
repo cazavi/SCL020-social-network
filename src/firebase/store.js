@@ -13,12 +13,12 @@ import {
   setDoc,
   query,
   where,
-  auth
-
+  auth,
 } from "./init.js";
 
 const readData = async function () {
-  let dataArray = [];
+  try{
+    let dataArray = [];
   const querySnapshot = await getDocs(collection(firestore, "Posts"));
   querySnapshot.forEach((doc) => { 
     dataArray.push({ id: doc.id, data: doc.data() });
@@ -43,42 +43,55 @@ const readData = async function () {
   } 
   console.log('lista', dataArray)
   return dataArray;
+  }
+  catch (error){
+    throw error.message
+  }
 };
 
 // guarda los usuarios registrados
 // firestore genera automáticamente el id
 const savedUser = async (email, uid) => {
-  await addDoc(collection(firestore, "user"), {
+  try{
+    await addDoc(collection(firestore, "user"), {
     email,
     uid,
-  });
+  })}
+  catch (error){
+    throw error.message
+  }
 };
 
 //DATA TYPE
-const docData = {
-  stringExample: "Hello world!",
-  booleanExample: true,
-  numberExample: 3.14159265,
-  dateExample: Timestamp.fromDate(new Date("December 10, 1815")),
-  arrayExample: [5, true, "hello"],
-  nullExample: null,
-  objectExample: {
-    a: 5,
-    b: {
-      nested: "foo",
-    },
-  },
-};
+// const docData = {
+//   stringExample: "Hello world!",
+//   booleanExample: true,
+//   numberExample: 3.14159265,
+//   dateExample: Timestamp.fromDate(new Date("December 10, 1815")),
+//   arrayExample: [5, true, "hello"],
+//   nullExample: null,
+//   objectExample: {
+//     a: 5,
+//     b: {
+//       nested: "foo",
+//     },
+//   },
+// };
 
 // Add a new document with a generated id.
 const createPost = async (title, description) => {
-  console.log("creando post");
-  const docRef = await addDoc(collection(firestore, "Posts"), {
+  // console.log("creando post");
+  try{
+    const docRef = await addDoc(collection(firestore, "Posts"), {
     title: title,
     description: description,
-  });
-  console.log("Document written with ID: ", docRef.id);
+  })}
+  catch (error){
+  throw error.message
+}
+  // console.log("Document written with ID: ", docRef.id);
 };
+
 // obtener el post que se va a editar
 const getPost = async (id) => {
   try {
@@ -94,17 +107,25 @@ const getPost = async (id) => {
 // editar el post que se va a editar
 const editPost = async (id, title, description) => {
   const docRef = doc(firestore, 'Posts', id)
-  await updateDoc(docRef, {
+  try{
+    await updateDoc(docRef, {
     title,
     description,
-  });
+  })}
+  catch (error){
+    throw error.message
+  }
 };
 
 // Update the timestamp field with the value from the server
 const time = async (timestamp) => {
-  const updateTimestamp = await updateDoc(docRef, {
+  try{
+    const updateTimestamp = await updateDoc(docRef, {
     timestamp: serverTimestamp(),
-  });
+  })}
+  catch (error){
+    throw error.message
+  }
 };
 
 //DELETE POST
@@ -136,8 +157,8 @@ const likePost = async (id, idUser) => {
       const likeRef = await setDoc(collectionRef, { id: idUser });
       document.getElementById(`${id}__like`).src = "./assets/like.png";
     }
-  } catch (e) {
-    throw e.message;
+  } catch (error) {
+    throw error.message;
   }
 };
 
