@@ -773,9 +773,9 @@ hr {
 }
 
 #alertLogin, #alertRegister{
-  background-color:#BCE4D7;
-  color: black;
-  font-weight: bold;
+  background-color:rgba(248, 245, 245, 0.517);
+  color: rgb(146, 5, 5);
+  font-weight: 600;
   margin: 8px;
   border-radius: 5px;
 }

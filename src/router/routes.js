@@ -34,6 +34,7 @@ const routes = {
 };
 
 function navigate(route, substr = "") {
+  console.log(route)
   const template = routes[route].template;
   const path = routes[route].path; 
   history.pushState({}, route, `${path}?${substr}`);

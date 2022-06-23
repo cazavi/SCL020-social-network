@@ -61,7 +61,7 @@ function updatePost() {
 
   // EDIT POSTS TEMPLATE 
   const updatePost = container.querySelector(".updatePost");
-  const updatePosts = async () => {
+  const updatePosts = () => {
     let post = "";
     const ul =// html
       `
@@ -75,9 +75,9 @@ function updatePost() {
   };
   updatePosts();
   // GET POST BY ID TO EDIT
-  try{
-    const getPostId = async () => {
-    // Obtengo el parámetro de la url :ID
+  const getPostId = async () => {
+    try {
+          // Obtengo el parámetro de la url :ID
     let substr = window.location.search.substring(1);
     let id = substr.split("=")[1];
     // Llamo a mi función get de Firebase
@@ -89,11 +89,12 @@ function updatePost() {
     // Agrego la información
     title.value = data.title;
     postBody.value = data.description;
-  getPostId()};
-  } catch (error) {
-    throw error.message
-  }
+    } catch (error) {
+      throw error.message;
+    }
 
+  };
+  getPostId();
 // UPDATE POST 
   const updateListPost = container.querySelector("#addUpdatePost");
   if (updateListPost) {
@@ -101,6 +102,7 @@ function updatePost() {
       const title = container.querySelector("#postTitle").value;
       const description = container.querySelector("#postBody").value;
       // Obtengo el parámetro de la url :ID
+      // local.storage 
       let substr = window.location.search.substring(1);
       let id = substr.split("=")[1];
       if (title || description) {
