@@ -31,10 +31,10 @@ const createUser = async (auth, email, password) => {
 const signIn = async (email, password) => {
   try {
     const response = await signInWithEmailAndPassword(auth, email, password);
-    console.log('user login with email and password')
+    // console.log('user login with email and password')
     return response;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     throw error.message;
   }
 };
@@ -43,40 +43,61 @@ const signIn = async (email, password) => {
 const signOutWithEmail = async (auth) =>{
   try {
     const response = await signOut(auth);
-    console.log('user logout');
+    // console.log('user logout');
     return response;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error.message;
   }
 }
 
 
 // REDIRECT GOOGLE ACCESS
-const redirectResult = function(){
+const redirectResult = function()
+{const auth = getAuth();
 getRedirectResult(auth)
   .then((result) => {
-    // navigate("news")
-    // console.log(result)
-// This gives you a Google Access Token. You can use it to access Google APIs.
-const credential = GoogleAuthProvider.credentialFromResult(result);
- const token = credential.accessToken;
+    // This gives you a Google Access Token. You can use it to access Google APIs.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
 
-// The signed-in user info.
-const user = result.user;
-})
-.catch((error) => {
-  // console.log(error)
-// Handle Errors here.
-const errorCode = error.code;
-const errorMessage = error.message;
-// The email of the user's account used.
-const email = error.email;
-// The AuthCredential type that was used.
-const credential = GoogleAuthProvider.credentialFromError(error);
+    // The signed-in user info.
+    const user = result.user;
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });}
+// {
+// getRedirectResult(auth)
+//   .then((result) => {
+//     // navigate("news")
+//     // console.log(result)
+// // This gives you a Google Access Token. You can use it to access Google APIs.
+// const credential = GoogleAuthProvider.credentialFromResult(result);
+// const token = credential.accessToken;
 
-});
-}
+// // The signed-in user info.
+// const user = result.user;
+// return user;
+// })
+//   catch(error) {
+//   throw error.message;
+//   // console.log(error)
+// // Handle Errors here.
+// const errorCode = error.code;
+// const errorMessage = error.message;
+// // The email of the user's account used.
+// const email = error.email;
+// // The AuthCredential type that was used.
+// const credential = GoogleAuthProvider.credentialFromError(error);
+// };
+// }
 // const redirectEmail = async (auth) => {
 // try {
 // await getRedirectResult(auth);
