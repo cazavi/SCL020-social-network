@@ -75,7 +75,8 @@ function updatePost() {
   };
   updatePosts();
   // GET POST BY ID TO EDIT
-  const getPostId = async () => {
+  try{
+    const getPostId = async () => {
     // Obtengo el parámetro de la url :ID
     let substr = window.location.search.substring(1);
     let id = substr.split("=")[1];
@@ -88,8 +89,11 @@ function updatePost() {
     // Agrego la información
     title.value = data.title;
     postBody.value = data.description;
-  };
-  getPostId();
+  getPostId()};
+  } catch (error) {
+    throw error.message
+  }
+
 // UPDATE POST 
   const updateListPost = container.querySelector("#addUpdatePost");
   if (updateListPost) {
