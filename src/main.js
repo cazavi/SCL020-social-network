@@ -26,4 +26,3 @@ switch (path) {
     navigate("login");
     break;
 }
- 

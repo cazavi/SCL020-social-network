@@ -79,6 +79,9 @@ function updatePost() {
     try {
           // Obtengo el parámetro de la url :ID
     let substr = window.location.search.substring(1);
+    console.log(substr)
+    if(!substr){
+    return}
     let id = substr.split("=")[1];
     // Llamo a mi función get de Firebase
     const data = await getPost(id);
@@ -92,7 +95,6 @@ function updatePost() {
     } catch (error) {
       throw error.message;
     }
-
   };
   getPostId();
 // UPDATE POST 
