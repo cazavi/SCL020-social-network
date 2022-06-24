@@ -16,7 +16,7 @@ import {
   auth,
 } from "./init.js";
 
-const readData = async function () {
+const readData = async  () => {
   try{
     let dataArray = [];
   const querySnapshot = await getDocs(collection(firestore, "Posts"));
@@ -140,21 +140,21 @@ const deletePost = async (id) => {
 };
 
 
-const likePost = async (id, idUser) => { 
+const likePost = async (id, uid) => { 
   // Busca el like
-  const ref = await  doc(firestore, "Posts", id , "likes" , idUser);
+  const ref = await  doc(firestore, "Posts", id , "likes" , uid);
   try {
     const snap = await getDoc(ref) 
     if (snap.exists()) { 
       // Quitar el like
-      await deleteDoc(doc(firestore, "Posts", id, 'likes',idUser));
+      await deleteDoc(doc(firestore, "Posts", id, 'likes',uid));
       document.getElementById(`${id}__like`).src = "./assets/dislike.png";
     }
     else{
       // Agregar el like
-      const collectionRef = await doc(firestore, "Posts", id, "likes", idUser);
+      const collectionRef = await doc(firestore, "Posts", id, "likes", uid);
       console.log(collectionRef, "collectionRef");
-      const likeRef = await setDoc(collectionRef, { id: idUser });
+      const likeRef = await setDoc(collectionRef, { id: uid });
       document.getElementById(`${id}__like`).src = "./assets/like.png";
     }
   } catch (error) {
