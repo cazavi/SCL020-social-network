@@ -29,9 +29,12 @@ function updatePost() {
     </div>
     <div class="dashboard">
         <h2>EDICIÓN DE POST</h2>
-        <div class="updatePost">
-        </div>      
-        <button id="addUpdatePost">Editar post</button>
+        <div class="updatePost newPostList">
+        </div>    
+        <div class="action-buttons">
+          <a class="cancelButton" href="/publications"> Cancelar </a>
+          <button id="addUpdatePost">Editar post</button>
+        </div>  
     </div>
 </div>`;
   const container = document.createElement("div");
@@ -65,10 +68,12 @@ function updatePost() {
     let post = "";
     const ul =// html
       `
-          <ul class="editPost">
+          <div class="editPost">
+            <label>Ingresa el título de post</label>
             <input class="postTitle" id="postTitle" />
+            <label>Escribe el contenido de tu post aquí</label>
             <textarea class="postBody" id="postBody"></textarea>
-          </ul>
+          </div>
         `;
     post += ul;
     updatePost.innerHTML = post;

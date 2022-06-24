@@ -29,7 +29,10 @@ function addPost() {
   
         <div class="newPost">
         </div>      
-        <button id="addNewPost">Agregar nuevo post</button>
+        <div class="action-buttons">
+          <a class="cancelButton" href="/publications"> Cancelar </a>
+          <button id="addNewPost">Agregar nuevo post</button>
+        </div>
     </div>
 </div>`;
   const container = document.createElement("div");
@@ -64,12 +67,12 @@ function addPost() {
       let html= '';
         const ul = //html 
         `
-          <ul class="newPostList"> 
+          <div class="newPostList"> 
             <label>Ingresa el título de post</label>
             <input id="newPostTitle"/>
             <label>Escribe el contenido de tu post aquí</label>
             <textarea id="newPostDescription"></textarea>
-          </ul>
+          </div>
         `;
         html += ul;
       writePost.innerHTML = html;
