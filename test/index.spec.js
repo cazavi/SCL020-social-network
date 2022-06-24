@@ -4,7 +4,7 @@
 // import {profile} from '../src/templates/profile.js';
 // import {publications} from '../src/templates/publications.js';
 // import {addPost} from '../src/templates/addPost.js';
-// import {editPost} from '../src/templates/editPost.js';
+// import {updatePost} from '../src/templates/updatePost.js';
 
 //FIREBASE IMPORTS
 import { 
@@ -32,7 +32,9 @@ import {auth,
   getDoc, 
   updateDoc, 
   deleteDoc, 
-  doc, } from "../src/firebase/init.js"
+  doc,
+  firestore,
+  collection, } from "../src/firebase/init.js"
 
 //VARIABLES
 let email = 
@@ -133,10 +135,25 @@ jest.mock('../src/firebase/init.js', ()=> {
         Promise.resolve({ user: 'admin' })
       }),
 
-      
+      // getDocs: jest.fn((doc)=> {
+      //   if(!doc) {
+      //       throw new Error('ERROR')
+      //   }
+
+      //   Promise.resolve({ user: 'admin' })
+      // }),
+
+      // addDoc: jest.fn((email)=> {
+      //   if(!email) {
+      //       throw new Error('ERROR')
+      //   }
+
+      //   Promise.resolve({ user: 'admin' })
+      // }),
   }
 })
 
+//AUTH TESTS
 describe('Tests for the signIn function', ()=> {
 
   // toHaveBeenCalled y toHaveBennCalledWith solo sirven para funcion Mock
@@ -200,6 +217,49 @@ describe('Tests for the signOutWithEmail function', ()=> {
     }
   })
 })
+
+//STORE TESTS
+// describe('Tests for the readData function', ()=> {
+
+//   it('Should call getDocs', async()=> {
+//     await readData(doc)
+//     expect(getDocs).toHaveBeenCalled()
+//   })
+
+//   it('Should call getDocs with the collection arguments', async()=> {
+//     await readData(collection)
+//     expect(getDocs).toHaveBeenCalledWith(collection)
+//   })
+
+//   it('Should throw an error if executed without arguments', async()=> {
+//     try {
+//       await readData()
+//     } catch(error) {
+//       expect(error).toMatch('ERROR')
+//     }
+//   })
+// })
+
+// describe('Tests for the savedUser function', ()=> {
+
+//   it('Should call addDoc', async()=> {
+//     await savedUser(email)
+//     expect(addDoc).toHaveBeenCalled()
+//   })
+
+//   it('Should call addDoc with the email and uid arguments', async()=> {
+//     await savedUser(email, uid)
+//     expect(addDoc).toHaveBeenCalledWith(email, uid)
+//   })
+
+//   it('Should throw an error if executed without arguments', async()=> {
+//     try {
+//       await savedUser()
+//     } catch(error) {
+//       expect(error).toMatch('ERROR')
+//     }
+//   })
+// })
 
 // describe('Tests for the logIn function', ()=> {
 

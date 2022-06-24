@@ -68,9 +68,9 @@ function publications() {
         let activeLike = '';
         const imageTemp = 'https://st.depositphotos.com/1743476/1262/i/450/depositphotos_12621249-stock-photo-new-life.jpg';
         if (doc.activeLike) {
-          activeLike = `<img id="${doc.id}__like" width="25" src="./assets/like.png">`;
+          activeLike = `<img id="like-${doc.id}" width="25" src="./assets/like.png">`;
         } else {
-          activeLike = `<img id="${doc.id}__like" width="25" src="./assets/dislike.png">`;
+          activeLike = `<img id="dislike${doc.id}" width="25" src="./assets/dislike.png">`;
         }
         const likes = doc.likes || 0;
         const ul =// html
@@ -88,7 +88,7 @@ function publications() {
                 </header>
                 <section class="modal-content">¿De verdad quieres eliminar este post?</section>
                 <footer class="modal-footer">
-                <button class="btnDeletePost" id="${doc.id}">Eliminar</button>
+                <button class="btnDeletePost" id="btnDelete-${doc.id}">Eliminar</button>
                 <button class="close-modal" aria-label="close modal" data-close>Cancelar</button>
                 </footer>
               </div>
@@ -97,12 +97,12 @@ function publications() {
               <span>
                 ${likes}
               </span>
-              <picture class="toggleLike"  id="${doc.id}">
+              <picture class="toggleLike"  id="toggleLike-${doc.id}">
                 ${activeLike}
               </picture>
             </div>
-            <a class="btnUpdatePost" id="${doc.id}" href="/updatePost?id=${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
-            <button  class="open-modal btnDeletePost" data-open="modal1" class="btnDeletePost" id="${doc.id}"><img width="20" class="deleteButton" src="../assets/delete.png"></button>
+            <a class="btnUpdatePost" id="btnUpdate-${doc.id}" href="/updatePost?id${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
+            <button  class="open-modal btnDeletePost" data-open="modal1" class="btnDeletePost" id="delete-${doc.id}"><img width="20" class="deleteButton" src="../assets/delete.png"></button>
             </div>
           </div>
         `;
@@ -117,16 +117,23 @@ function publications() {
         // eslint-disable-next-line func-names
         el.addEventListener('click', function () {
           const modalId = this.dataset.open;
+          console.log(modalId)
           document.getElementById(modalId).classList.add(isVisible);
         });
       }
       const btnDeletePost = container.querySelectorAll('.btnDeletePost');
       btnDeletePost.forEach((btnDelete) => {
       btnDelete.addEventListener("click", function (event) {
-        deletePost(btnDelete.id);
+        const id = btnDelete.id.split('-')[1];
+        deletePost(id);
+        // const modalId = this.dataset.open;
+        const modal = document.getElementById('modal1');
+        console.log(modal)
+        // classList.remove(isVisible);
           // navigate('');
         });
       });
+
       // eslint-disable-next-line no-restricted-syntax
       for (const el of closeEls) {
         // eslint-disable-next-line func-names
@@ -141,6 +148,9 @@ function publications() {
       const btnUpdatePost = container.querySelectorAll('.btnUpdatePost');
       btnUpdatePost.forEach((btnUpdate) => {
         btnUpdate.addEventListener('click', (event) => {
+          // const id = btnUpdate.id.split('-')[1]
+          // id.window.location.pathname;
+          // if (id) {
           const btnUpdate = window.location.pathname;
           if (btnUpdate) {
             navigate('updatePost');
