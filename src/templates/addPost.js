@@ -29,7 +29,10 @@ function addPost() {
   
         <div class="newPost">
         </div>      
-        <button id="addNewPost">Agregar nuevo post</button>
+        <div class="action-buttons">
+          <a class="cancelButton" href="/publications"> Cancelar </a>
+          <button id="addNewPost">Agregar nuevo post</button>
+        </div>
     </div>
 </div>`;
   const container = document.createElement("div");

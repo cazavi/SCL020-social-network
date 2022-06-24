@@ -717,7 +717,7 @@ hr {
   background-color: #fff;
 }
 .updatePost .editPost textarea.postBody,
-.newPost textarea.postBody{
+.newPost textarea{
   width: 100%;
   height: 250px;
   border-radius: 5px;
