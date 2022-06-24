@@ -30,8 +30,11 @@ function updatePost() {
     <div class="dashboard">
         <h2>EDICIÓN DE POST</h2>
         <div class="updatePost newPostList">
-        </div>      
-        <button id="addUpdatePost">Editar post</button>
+        </div>    
+        <div class="action-buttons">
+          <a class="cancelButton" href="/publications"> Cancelar </a>
+          <button id="addUpdatePost">Editar post</button>
+        </div>  
     </div>
 </div>`;
   const container = document.createElement("div");

@@ -28,7 +28,6 @@ function publications() {
       <h5>PlantGram</h5>
     </div>
     <div class="dashboard">
-        <h2>PUBLICACIONES</h2>
         <button id="btnCreatePost">Nuevo post</button>
         <div class="createPost">
           
