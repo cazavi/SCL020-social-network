@@ -13,6 +13,7 @@ import {
   setDoc,
   query,
   where,
+  onSnapshot,
   auth,
 } from "./init.js";
 
@@ -85,6 +86,7 @@ const createPost = async (title, description) => {
     const docRef = await addDoc(collection(firestore, "Posts"), {
     title: title,
     description: description,
+    likes: [  ],
   })}
   catch (error){
   throw error.message
@@ -142,24 +144,44 @@ const deletePost = async (id) => {
 
 const likePost = async (id, uid) => { 
   // Busca el like
-  const ref = await  doc(firestore, "Posts", id , "likes" , uid);
-  try {
+  try {  
+    const ref = await  doc(firestore, "Posts", id);
     const snap = await getDoc(ref) 
+    const likeData = snap.data()
+    // console.log(document.getElementById(`toggleLike-${id}`),"AQUÍ")
     if (snap.exists()) { 
       // Quitar el like
-      await deleteDoc(doc(firestore, "Posts", id, 'likes',uid));
-      document.getElementById(`${id}__like`).src = "./assets/dislike.png";
-    }
+      const toUpdate = [...likeData.likes].push(uid)
+      console.log(toUpdate, likeData)
+      try{
+        const updatedDoc = await updateDoc(ref, {
+          likes: toUpdate
+        })
+      console.log(updatedDoc)}
+      catch (error){
+        throw error.message
+      }
+      // await deleteDoc(doc(firestore, "Posts", id));
+      document.getElementById(`like-${id}`).src = "./assets/dislike.png";
+    // console.log(`${ike`)id}__l
+  }
     else{
+      console.log('ingresé')
       // Agregar el like
-      const collectionRef = await doc(firestore, "Posts", id, "likes", uid);
+      const collectionRef = await doc(firestore, "Posts", id, "likes");
       console.log(collectionRef, "collectionRef");
-      const likeRef = await setDoc(collectionRef, { id: uid });
-      document.getElementById(`${id}__like`).src = "./assets/like.png";
+      await setDoc(collectionRef, { id: uid });
+      document.getElementById(`like-${id}`).src = "./assets/like.png";
     }
   } catch (error) {
+    console.log(error)
     throw error.message;
   }
+};
+
+const snapshot = (callback) => {
+const q = query(collection(firestore, "Posts"));
+onSnapshot(q, (callback))
 };
 
 export {
@@ -171,4 +193,5 @@ export {
   time,
   deletePost,
   likePost,
+  snapshot,
 };

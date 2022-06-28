@@ -1,5 +1,5 @@
-import { auth } from '../firebase/init.js';
-import { readData, deletePost, likePost } from '../firebase/store.js';
+import { auth, } from '../firebase/init.js';
+import { readData, deletePost, likePost, snapshot, } from '../firebase/store.js';
 // eslint-disable-next-line import/no-cycle
 import { navigate } from '../router/routes.js';
 import { signOutWithEmail } from '../firebase/auth.js';
@@ -60,17 +60,19 @@ function publications() {
   // DISPLAY POSTS WITH LIKES
   const postList = container.querySelector('.createPost');
   const setupPosts = async () => {
-    const data = await readData();
-    if (data) {
+    // const data = await readData();
+    // if (data) {
+      snapshot((callback)=> {
       let html = '';
-      data.forEach((doc) => {
-        const post = doc.data;
+      callback.forEach((doc) => {
+        const post = doc.data();
+        console.log(post)
         let activeLike = '';
         const imageTemp = 'https://st.depositphotos.com/1743476/1262/i/450/depositphotos_12621249-stock-photo-new-life.jpg';
         if (doc.activeLike) {
           activeLike = `<img id="like-${doc.id}" width="25" src="./assets/like.png">`;
         } else {
-          activeLike = `<img id="dislike${doc.id}" width="25" src="./assets/dislike.png">`;
+          activeLike = `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">`;
         }
         const likes = doc.likes || 0;
         const ul =// html
@@ -102,13 +104,14 @@ function publications() {
               </picture>
             </div>
             <a class="btnUpdatePost" id="btnUpdate-${doc.id}" href="/updatePost?id${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
-            <button  class="open-modal btnDeletePost" data-open="modal1" class="btnDeletePost" id="delete-${doc.id}"><img width="20" class="deleteButton" src="../assets/delete.png"></button>
+            <button  class="open-modal btnDeletePost" data-open="modal1" ><img width="20" class="deleteButton" src="../assets/delete.png"></button>
             </div>
           </div>
         `;
         html += ul;
       });
       postList.innerHTML = html;
+      //DELETE POST
       const openEls = container.querySelectorAll('[data-open]');
       const closeEls = container.querySelectorAll('[data-close]');
       const isVisible = 'is-visible';
@@ -133,7 +136,6 @@ function publications() {
           // navigate('');
         });
       });
-
       // eslint-disable-next-line no-restricted-syntax
       for (const el of closeEls) {
         // eslint-disable-next-line func-names
@@ -148,29 +150,35 @@ function publications() {
       const btnUpdatePost = container.querySelectorAll('.btnUpdatePost');
       btnUpdatePost.forEach((btnUpdate) => {
         btnUpdate.addEventListener('click', (event) => {
-          // const id = btnUpdate.id.split('-')[1]
-          // id.window.location.pathname;
-          // if (id) {
+          const id = btnUpdate.id.split('-')[1]
+          id.window.location.pathname;
+          if (id) {
           const btnUpdate = window.location.pathname;
           if (btnUpdate) {
             navigate('updatePost');
-          }
-        });
-      });
+        }}})});
+
       // BUTTON LIKE FUNCTIONALITY
       const toggleLike = container.querySelectorAll('.toggleLike');
-      toggleLike.forEach((child) => {
+      toggleLike.forEach((like) => {
         // eslint-disable-next-line func-names
-        child.addEventListener('click', function () {
-          likePost(this.id, auth.currentUser.uid);
+        like.addEventListener('click', function () {
+          const id = like.id.split('-')[1];
+          console.log(id)
+          likePost(id, auth.currentUser.uid);
           setupPosts();
         });
       });
-    } else {
-      postList.innerHTML = '<p>Ingresa para ver tus posts</p>';
-    }
+    })
+  // } 
+  //   else {
+  //     postList.innerHTML = '<p>Ingresa para ver tus posts</p>';
+  //   }
+      
   };
+  
   setupPosts();
+
   // BUTTON ADD NEW POST
   const addPost = container.querySelector('#btnCreatePost');
   if (addPost) {

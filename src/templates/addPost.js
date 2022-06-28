@@ -1,5 +1,5 @@
-import { auth } from "../firebase/init.js";
-import { createPost } from "../firebase/store.js";
+import { auth, onSnapshot } from "../firebase/init.js";
+import { createPost,} from "../firebase/store.js";
 import { navigate } from "../router/routes.js";
 import { signOutWithEmail } from "../firebase/auth.js";
 
@@ -98,7 +98,6 @@ function addPost() {
         alert('Algo no está bien, inténtalo nuevamente');
       }
   })}
-
   return container;
 }; 
 export { addPost };

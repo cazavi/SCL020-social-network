@@ -26,6 +26,7 @@ import { getFirestore,
   deleteDoc,
   query,
   where,
+  onSnapshot,
   } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
 
 import { firebaseConfig } from './config.js';
@@ -63,4 +64,6 @@ export {
   onAuthStateChanged,
   query,
   where,
+  onSnapshot,
+  
 };
