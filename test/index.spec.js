@@ -1,11 +1,3 @@
-// //TEMPLATES IMPORTS
-// import {login} from '../src/templates/login.js';
-// import {register} from '../src/templates/register.js';
-// import {profile} from '../src/templates/profile.js';
-// import {publications} from '../src/templates/publications.js';
-// import {addPost} from '../src/templates/addPost.js';
-// import {updatePost} from '../src/templates/updatePost.js';
-
 //FIREBASE IMPORTS
 import { 
   createUser,  
@@ -61,61 +53,6 @@ null]
 let uid =
 ["cOxlnGlDwkaMxw04gATB0XSomFW2",
 null]
-
-// //TEMPLATES TESTS
-// describe('login must return a Div', () => {
-  
-//   test('login function', () =>{
-//     let create = login(email, password)
-//     expect(create instanceof HTMLElement).toBe(true)
-//   })
-// })
-
-// describe('register must return a Div', () => {
-  
-//   test('register function', () =>{
-//     let create = register(email, password)
-//     expect(create instanceof HTMLElement).toBe(true)
-//   })
-// })
-
-// describe('profile must return a Div', () => {
-  
-//   test('profile function', () =>{
-//     let create = profile()
-//     expect(create instanceof HTMLElement).toBe(true)
-//   })
-// })
-
-// describe('publications must return a Div', () => {
-  
-//   test('publications function', () =>{
-//     let create = publications(post)
-//     expect(create instanceof HTMLElement).toBe(true)
-//   })
-// })
-
-// describe('addPost must return a Div', () => {
-  
-//   test('addPost function', () =>{
-//     let create = addPost(post)
-//     expect(create instanceof HTMLElement).toBe(true)
-//   })
-// })
-
-// describe('editPost must return a Div', () => {
-  
-//   test('editPost function', () =>{
-//     let create = editPost(post)
-//     expect(create instanceof HTMLElement).toBe(true)
-//   })
-// })
-
-//FIREBASE MOCKS
-//AUTH
-
-// jest.mock("'https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js'");
-// signInWithRedirect.get.mockReturnThis(auth, provider);
 
 jest.mock('../src/firebase/init.js', ()=> {
   return {

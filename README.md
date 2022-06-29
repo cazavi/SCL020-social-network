@@ -59,3 +59,5 @@ Ver prototipo con interacciones [aquí](https://www.figma.com/proto/oGMhwqudUs2Y
 * Añadimos la función de eliminar post, donde posteriormente lo metimos en un modal donde se pida la confirmación de borrado.
 * Comenzamos con trabajo de test y mocks.
 * Añadimos otro template para redirigir el edit posts.
+* Tuvimos varios problemas con las funciones de like post por ids y temas de firestore.
+* Pudimos solucionar el cambiar la imagen del like al dar y quitar like.
