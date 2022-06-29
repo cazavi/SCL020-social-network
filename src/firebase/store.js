@@ -149,11 +149,10 @@ const likePost = async (id, uid) => {
   try {  
     const ref = await  doc(firestore, "Posts", id);
     const snap = await getDoc(ref)
-    // let imgLike =  document.getElementById(`like-${id}`)
-    // console.log(document.getElementById(`toggleLike-${id}`),"AQUÍ")
     if (snap.exists()) { 
-      let userLiked = snap.data().likes;
+      console.log('AGARRO EL LIKE')
       document.getElementById(`like-${id}`).src = "./assets/like.png";
+      let userLiked = snap.data().likes;
       if(!userLiked.includes(uid)){
         await updateDoc(ref, {
           likes: arrayUnion(uid)
