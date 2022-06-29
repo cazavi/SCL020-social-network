@@ -61,10 +61,9 @@ function updatePost() {
       throw error.message;
     }
   });
-
   // EDIT POSTS TEMPLATE 
-  const updatePost = container.querySelector(".updatePost");
-  const updatePosts = () => {
+  const viewUpdatePost = container.querySelector(".updatePost");
+  const updatePostTemplate = () => {
     let post = "";
     const ul =// html
       `
@@ -76,27 +75,31 @@ function updatePost() {
           </div>
         `;
     post += ul;
-    updatePost.innerHTML = post;
+    viewUpdatePost.innerHTML = post;
   };
-  updatePosts();
+  updatePostTemplate();
   // GET POST BY ID TO EDIT
+
   const getPostId = async () => {
     try {
           // Obtengo el parámetro de la url :ID
-    let substr = window.location.search.substring(1);
-    console.log(substr)
-    if(!substr){
-    return}
-    let id = substr.split("=")[1];
+    // let substr = window.location.search.substring(1);
+    // console.log(substr)
+    // if(!substr){
+    // return}
+    // let id = substr.split("=")[1];
+    let savedId = window.localStorage.getItem(id)
+    if(savedId){
     // Llamo a mi función get de Firebase
-    const data = await getPost(id);
-    console.log("data", data);
+    const postId = await getPost(savedId);
+    // console.log("data", data);
     // Llamo los IDs de los inputs
     const title = document.getElementById("postTitle");
     const postBody = document.getElementById("postBody");
     // Agrego la información
-    title.value = data.title;
-    postBody.value = data.description;
+    title.value = postId.title;
+    postBody.value = postId.description;
+    }
     } catch (error) {
       throw error.message;
     }
@@ -106,15 +109,14 @@ function updatePost() {
   const updateListPost = container.querySelector("#addUpdatePost");
   if (updateListPost) {
     updateListPost.addEventListener("click", function () {
+      let postIdToUpdate = window.localStorage.getItem(id)
       const title = container.querySelector("#postTitle").value;
       const description = container.querySelector("#postBody").value;
       // Obtengo el parámetro de la url :ID
-      // local.storage 
-      let substr = window.location.search.substring(1);
-      let id = substr.split("=")[1];
+      // let substr = window.location.search.substring(1);
+      // let id = substr.split("=")[1];
       if (title || description) {
-        editPost(id, title, description);
-        // navigate("publications");
+        editPost(postIdToUpdate, title, description);
         setTimeout(() => {
           window.location.href = "/publications";
         }, 1000);
@@ -122,5 +124,5 @@ function updatePost() {
     });
   }
   return container;
-}
+};
 export { updatePost };

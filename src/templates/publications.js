@@ -6,8 +6,7 @@ import { signOutWithEmail } from '../firebase/auth.js';
 
 function publications() {
   // eslint-disable-next-line operator-linebreak
-  const html =
-    // html
+  const html =// html
     `
 <div class="background-white">
     <div class="bar">
@@ -150,13 +149,18 @@ function publications() {
       const btnUpdatePost = container.querySelectorAll('.btnUpdatePost');
       btnUpdatePost.forEach((btnUpdate) => {
         btnUpdate.addEventListener('click', (event) => {
-          const id = btnUpdate.id.split('-')[1]
-          id.window.location.pathname;
-          if (id) {
-          const btnUpdate = window.location.pathname;
-          if (btnUpdate) {
+        const id = btnUpdate.id.split('-')[1]
+          let idPost = container.getElementsById(id).value;
+          window.localStorage.setItem('id', idPost);
+          // const id = btnUpdate.id.split('-')[1]
+          // id.window.location.pathname;
+          // if (id) {
+          // const btnUpdate = window.location.pathname;
+          // if (btnUpdate) {
+            // navigate(`updatePost?id=${id}`);
             navigate('updatePost');
-        }}})});
+        //}}
+      })});
 
       // BUTTON LIKE FUNCTIONALITY
       const toggleLike = container.querySelectorAll('.toggleLike');
@@ -176,9 +180,8 @@ function publications() {
   //   }
       
   };
-  
-  setupPosts();
 
+  setupPosts();
   // BUTTON ADD NEW POST
   const addPost = container.querySelector('#btnCreatePost');
   if (addPost) {
