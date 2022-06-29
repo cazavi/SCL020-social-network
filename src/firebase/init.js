@@ -27,6 +27,8 @@ import { getFirestore,
   query,
   where,
   onSnapshot,
+  arrayUnion, 
+  arrayRemove
   } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
 
 import { firebaseConfig } from './config.js';
@@ -65,5 +67,6 @@ export {
   query,
   where,
   onSnapshot,
-  
+  arrayUnion, 
+  arrayRemove
 };
