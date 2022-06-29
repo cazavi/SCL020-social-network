@@ -33,11 +33,11 @@ const routes = {
   }
 };
 
-function navigate(route, substr = "") {
+function navigate(route) { //, substr = ""
   console.log(route)
   const template = routes[route].template;
   const path = routes[route].path; 
-  history.pushState({}, route, `${path}?${substr}`);
+  history.pushState({}, route); //, `${path}?${substr}`
   const root = document.getElementById('root');
   root.innerHTML = ' ';
   root.appendChild(template);

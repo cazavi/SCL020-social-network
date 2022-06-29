@@ -19,8 +19,8 @@ switch (path) {
     navigate("addPost");
     break; 
   case "/updatePost":
-    let substr =  window.location.search.substring(1)
-    navigate("updatePost", substr);
+    // let substr =  window.location.search.substring(1)
+    navigate("updatePost"); //, substr
     break; 
   default:
     navigate("login");
