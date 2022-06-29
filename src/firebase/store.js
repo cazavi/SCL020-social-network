@@ -15,6 +15,8 @@ import {
   where,
   onSnapshot,
   auth,
+  arrayUnion, 
+  arrayRemove
 } from "./init.js";
 
 const readData = async  () => {
@@ -147,37 +149,46 @@ const likePost = async (id, uid) => {
   try {  
     const ref = await  doc(firestore, "Posts", id);
     const snap = await getDoc(ref) 
-    const likeData = snap.data()
     // console.log(document.getElementById(`toggleLike-${id}`),"AQUÍ")
     if (snap.exists()) { 
-      // Quitar el like
-      const toUpdate = [...likeData.likes].push(uid)
-      console.log(toUpdate, likeData)
-      try{
-        const updatedDoc = await updateDoc(ref, {
-          likes: toUpdate
+      let userLiked = snap.data().likes;
+      if(!userLiked.includes(uid)){
+        await updateDoc(ref, {
+          likes: arrayUnion(uid)
+        });
+      }else{
+        await updateDoc(ref, {
+          likes: arrayRemove(uid)
         })
-      console.log(updatedDoc)}
-      catch (error){
-        throw error.message
       }
-      // await deleteDoc(doc(firestore, "Posts", id));
-      document.getElementById(`like-${id}`).src = "./assets/dislike.png";
-    // console.log(`${ike`)id}__l
-  }
-    else{
-      console.log('ingresé')
-      // Agregar el like
-      const collectionRef = await doc(firestore, "Posts", id, "likes");
-      console.log(collectionRef, "collectionRef");
-      await setDoc(collectionRef, { id: uid });
-      document.getElementById(`like-${id}`).src = "./assets/like.png";
-    }
-  } catch (error) {
-    console.log(error)
-    throw error.message;
-  }
-};
+  //     // Quitar el like
+  //     const toUpdate = [...likeData.likes].push(uid)
+  //     console.log(toUpdate, likeData)
+  //     try{
+  //       const updatedDoc = await updateDoc(ref, {
+  //         likes: toUpdate
+  //       })
+  //     console.log(updatedDoc)}
+  //     catch (error){
+  //       throw error.message
+  //     }
+  //     // await deleteDoc(doc(firestore, "Posts", id));
+  //     document.getElementById(`like-${id}`).src = "./assets/dislike.png";
+  //   // console.log(`${ike`)id}__l
+  // }
+  //   else{
+  //     console.log('ingresé')
+  //     // Agregar el like
+  //     const collectionRef = await doc(firestore, "Posts", id, "likes");
+  //     console.log(collectionRef, "collectionRef");
+  //     await setDoc(collectionRef, { id: uid });
+  //     document.getElementById(`like-${id}`).src = "./assets/like.png";
+  //   }
+  } 
+}catch (error) {
+  console.log(error)
+  throw error.message;
+}};
 
 const snapshot = (callback) => {
 const q = query(collection(firestore, "Posts"));
