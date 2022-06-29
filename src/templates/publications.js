@@ -3,6 +3,7 @@ import { readData, deletePost, likePost, snapshot, } from '../firebase/store.js'
 // eslint-disable-next-line import/no-cycle
 import { navigate } from '../router/routes.js';
 import { signOutWithEmail } from '../firebase/auth.js';
+import { getPostId } from './updatePost.js';
 
 function publications() {
   // eslint-disable-next-line operator-linebreak
@@ -102,8 +103,8 @@ function publications() {
                 ${activeLike}
               </picture>
             </div>
-            <a class="btnUpdatePost" id="btnUpdate-${doc.id}" href="/updatePost?id${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
-            <button  class="open-modal btnDeletePost" data-open="modal1" ><img width="20" class="deleteButton" src="../assets/delete.png"></button>
+            <button class="btnUpdatePost" id="btnUpdate-${doc.id}" ><img width="18" class="editButton" src="../assets/edit.png"></button>
+            <button class="open-modal btnDeletePost" data-open="modal1" ><img width="20" class="deleteButton" src="../assets/delete.png"></button>
             </div>
           </div>
         `;
@@ -149,16 +150,16 @@ function publications() {
       const btnUpdatePost = container.querySelectorAll('.btnUpdatePost');
       btnUpdatePost.forEach((btnUpdate) => {
         btnUpdate.addEventListener('click', (event) => {
-        const id = btnUpdate.id.split('-')[1]
-          let idPost = container.getElementsById(id).value;
-          window.localStorage.setItem('id', idPost);
+          const id = btnUpdate.id.split('-')[1] 
+          window.localStorage.setItem('id', id);
           // const id = btnUpdate.id.split('-')[1]
           // id.window.location.pathname;
           // if (id) {
           // const btnUpdate = window.location.pathname;
           // if (btnUpdate) {
             // navigate(`updatePost?id=${id}`);
-            navigate('updatePost');
+          navigate('updatePost');
+          getPostId();
         //}}
       })});
 
@@ -173,6 +174,7 @@ function publications() {
           setupPosts();
         });
       });
+      
     })
   // } 
   //   else {

@@ -1,13 +1,36 @@
 import { auth } from "../firebase/init.js";
-import {
-  editPost,
-  getPost,
-} from "../firebase/store.js";
+import { editPost, getPost } from "../firebase/store.js";
 import { navigate } from "../router/routes.js";
 import { signOutWithEmail } from "../firebase/auth.js";
 
+const getPostId = async () => {
+  try {
+    // Obtengo el parámetro de la url :ID
+    // let substr = window.location.search.substring(1);
+    // console.log(substr)
+    // if(!substr){
+    // return}
+    // let id = substr.split("=")[1];
+    let savedId = window.localStorage.getItem("id");
+    if (savedId) {
+      // Llamo a mi función get de Firebase
+      const postId = await getPost(savedId);
+      // console.log("data", data);
+      // Llamo los IDs de los inputs
+      const title = document.getElementById("postTitle");
+      const postBody = document.getElementById("postBody");
+      // Agrego la información
+      title.value = postId.title;
+      postBody.value = postId.description;
+    }
+  } catch (error) {
+    throw error.message;
+  }
+};
+
 function updatePost() {
-  const html =//html
+  const html =
+    //html
     `
 <div class="background-white">
     <div class="bar">
@@ -61,11 +84,12 @@ function updatePost() {
       throw error.message;
     }
   });
-  // EDIT POSTS TEMPLATE 
+  // EDIT POSTS TEMPLATE
   const viewUpdatePost = container.querySelector(".updatePost");
   const updatePostTemplate = () => {
     let post = "";
-    const ul =// html
+    const ul =
+      // html
       `
           <div class="editPost">
             <label>Ingresa el título de post</label>
@@ -78,38 +102,17 @@ function updatePost() {
     viewUpdatePost.innerHTML = post;
   };
   updatePostTemplate();
+  // Para que cuando recargues vuelva a llamar al POST ID
+  if(window.location.pathname === "/updatePost"){
+    getPostId();
+  }
   // GET POST BY ID TO EDIT
 
-  const getPostId = async () => {
-    try {
-          // Obtengo el parámetro de la url :ID
-    // let substr = window.location.search.substring(1);
-    // console.log(substr)
-    // if(!substr){
-    // return}
-    // let id = substr.split("=")[1];
-    let savedId = window.localStorage.getItem(id)
-    if(savedId){
-    // Llamo a mi función get de Firebase
-    const postId = await getPost(savedId);
-    // console.log("data", data);
-    // Llamo los IDs de los inputs
-    const title = document.getElementById("postTitle");
-    const postBody = document.getElementById("postBody");
-    // Agrego la información
-    title.value = postId.title;
-    postBody.value = postId.description;
-    }
-    } catch (error) {
-      throw error.message;
-    }
-  };
-  getPostId();
-// UPDATE POST 
+  // UPDATE POST
   const updateListPost = container.querySelector("#addUpdatePost");
   if (updateListPost) {
     updateListPost.addEventListener("click", function () {
-      let postIdToUpdate = window.localStorage.getItem(id)
+      let postIdToUpdate = window.localStorage.getItem("id");
       const title = container.querySelector("#postTitle").value;
       const description = container.querySelector("#postBody").value;
       // Obtengo el parámetro de la url :ID
@@ -124,5 +127,6 @@ function updatePost() {
     });
   }
   return container;
-};
-export { updatePost };
+}
+
+export { updatePost, getPostId };

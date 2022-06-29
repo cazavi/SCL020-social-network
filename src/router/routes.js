@@ -27,20 +27,27 @@ const routes = {
     template: addPost(),
   },
   updatePost: {
-    path: '/updatePost',
-    dinamic: true,
+    path: '/updatePost', 
     template: updatePost(),
   }
 };
 
+const root = document.getElementById('root');
+
+
 function navigate(route) { //, substr = ""
-  console.log(route)
   const template = routes[route].template;
   const path = routes[route].path; 
-  history.pushState({}, route); //, `${path}?${substr}`
-  const root = document.getElementById('root');
+  window.history.pushState({},  path, window.location.origin + path); //, `${path}?${substr}`
   root.innerHTML = ' ';
   root.appendChild(template);
 }
+
+
+window.onpopstate = () => {
+  const path = window.location.pathname.split("/")[1]
+  root.innerHTML = '';
+  root.appendChild(routes[path].template);
+};
 
 export { navigate };
