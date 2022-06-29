@@ -66,13 +66,13 @@ function publications() {
       callback.forEach((doc) => {
         const post = doc.data();
         console.log(post)
-        let activeLike = '';
+        // let activeLike = '';
         const imageTemp = 'https://st.depositphotos.com/1743476/1262/i/450/depositphotos_12621249-stock-photo-new-life.jpg';
-        if (doc.activeLike) {
-          activeLike = `<img id="like-${doc.id}" width="25" src="./assets/like.png">`;
-        } else {
-          activeLike = `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">`;
-        }
+        // if (doc.activeLike) {
+          let activeLike = `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">`;
+        // } else {
+        //   activeLike = `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">`;
+        // }
         const likes = doc.likes || 0;
         const ul =// html
           `
@@ -170,6 +170,7 @@ function publications() {
           const id = like.id.split('-')[1];
           console.log(id)
           likePost(id, auth.currentUser.uid);
+          console.log("HOLA")
           setupPosts();
         });
       });
