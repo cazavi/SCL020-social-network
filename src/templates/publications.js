@@ -65,11 +65,11 @@ function publications() {
       let html = '';
       callback.forEach((doc) => {
         const post = doc.data();
-        console.log(post)
-        // let activeLike = '';
+        const resultLikes = post.likes;
+        const likesSum = post.likesSum;
         const imageTemp = 'https://st.depositphotos.com/1743476/1262/i/450/depositphotos_12621249-stock-photo-new-life.jpg';
         // if (doc.activeLike) {
-          let activeLike = `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">`;
+          // let activeLike = `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">`;
         // } else {
         //   activeLike = `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">`;
         // }
@@ -96,10 +96,10 @@ function publications() {
             </div> 
             <div class="like"> 
               <span>
-                ${likes}
+                ${likesSum}
               </span>
               <picture class="toggleLike"  id="toggleLike-${doc.id}">
-                ${activeLike}
+                ${resultLikes.includes(auth.currentUser.uid)? `<img id="like-${doc.id}" width="25" src="./assets/like.png">` : `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">` }
               </picture>
             </div>
             <a class="btnUpdatePost" id="btnUpdate-${doc.id}" href="/updatePost?id${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
@@ -168,6 +168,7 @@ function publications() {
         // eslint-disable-next-line func-names
         like.addEventListener('click', function () {
           const id = like.id.split('-')[1];
+          // container.getElementById(`like-${id}`).src = "./assets/like.png";
           console.log(id)
           likePost(id, auth.currentUser.uid);
           console.log("HOLA")

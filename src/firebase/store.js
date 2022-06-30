@@ -26,24 +26,24 @@ const readData = async  () => {
   querySnapshot.forEach((doc) => { 
     dataArray.push({ id: doc.id, data: doc.data() });
   });
-  for (let i = 0; i < dataArray.length; i++) {
-    const element = dataArray[i];
-    let snap = await getDocs(collection(firestore, "Posts", element.id, 'likes'));
-    let likes = 0;
-    let id = []
-    snap.forEach( child =>{ 
-      console.log(child.data(), 'data')
-      id.push(child.id)
-      likes += Object.values(child.data()).length;
-    }) 
-    element.likes = likes;
-    if(id.includes(auth.currentUser.idUser)){
-      element.activeLike = true
-    }
-    else{
-      element.activeLike = false
-    }
-  } 
+  // for (let i = 0; i < dataArray.length; i++) {
+  //   const element = dataArray[i];
+  //   let snap = await getDocs(collection(firestore, "Posts", element.id, 'likes'));
+  //   let likes = 0;
+  //   let id = []
+  //   snap.forEach( child =>{ 
+  //     console.log(child.data(), 'data')
+  //     id.push(child.id)
+  //     likes += Object.values(child.data()).length;
+  //   }) 
+  //   element.likes = likes;
+  //   if(id.includes(auth.currentUser.idUser)){
+  //     element.activeLike = true
+  //   }
+  //   else{
+  //     element.activeLike = false
+  //   }
+  // } 
   console.log('lista', dataArray)
   return dataArray;
   }
@@ -89,6 +89,7 @@ const createPost = async (title, description) => {
     title: title,
     description: description,
     likes: [  ],
+    likesSum: 0,
   })}
   catch (error){
   throw error.message
@@ -151,17 +152,20 @@ const likePost = async (id, uid) => {
     const snap = await getDoc(ref)
     if (snap.exists()) { 
       console.log('AGARRO EL LIKE')
-      document.getElementById(`like-${id}`).src = "./assets/like.png";
+      // container.getElementById(`like-${id}`).src = "./assets/like.png";
       let userLiked = snap.data().likes;
+      let counter = snap.data().likesSum;
       if(!userLiked.includes(uid)){
         await updateDoc(ref, {
-          likes: arrayUnion(uid)
+          likes: arrayUnion(uid),
+          likesSum: counter + 1,
         });
       }else{        
         console.log('DISLIKE')
-        document.getElementById(`like-${id}`).src = "./assets/dislike.png";
+        // container.getElementById(`like-${id}`).src = "./assets/dislike.png";
         await updateDoc(ref, {
-          likes: arrayRemove(uid)
+          likes: arrayRemove(uid),
+          likesSum: counter - 1,
         });
         
       }
