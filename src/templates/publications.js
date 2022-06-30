@@ -102,7 +102,6 @@ function publications() {
                 ${resultLikes.includes(auth.currentUser.uid)? `<img id="like-${doc.id}" width="25" src="./assets/like.png">` : `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">` }
               </picture>
             </div>
-            <a class="btnUpdatePost" id="btnUpdate-${doc.id}" href="/updatePost?id${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
             <button  class="open-modal btnDeletePost" data-open="modal1" ><img width="20" class="deleteButton" src="../assets/delete.png"></button>
             </div>
           </div>
@@ -194,3 +193,5 @@ function publications() {
   return container;
 }
 export { publications };
+
+//<a class="btnUpdatePost" id="btnUpdate-${doc.id}" href="/updatePost?id${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
