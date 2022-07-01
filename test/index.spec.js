@@ -142,7 +142,7 @@ jest.mock('../src/firebase/init.js', ()=> {
 //AUTH TESTS
 describe('Tests for the signIn function', ()=> {
 
-  // toHaveBeenCalled y toHaveBennCalledWith solo sirven para funcion Mock
+  // toHaveBeenCalled y toHaveBeenCalledWith solo sirven para funcion Mock
   it('Should call signInWithEmailAndPassword', async()=> {
       await signIn(email, password)
       // Revisamos si durante la ejecucion de login se invoco la funcion singInWithEmailAndPassword

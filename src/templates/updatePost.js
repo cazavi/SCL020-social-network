@@ -88,14 +88,14 @@ function updatePost() {
     // if(!substr){
     // return}
     // let id = substr.split("=")[1];
-    let savedId = window.localStorage.getItem(id)
+    let savedId = window.localStorage.getItem('id')
     if(savedId){
     // Llamo a mi función get de Firebase
     const postId = await getPost(savedId);
     // console.log("data", data);
     // Llamo los IDs de los inputs
-    const title = document.getElementById("postTitle");
-    const postBody = document.getElementById("postBody");
+    const title = container.querySelector("#postTitle");
+    const postBody = container.querySelector("#postBody");
     // Agrego la información
     title.value = postId.title;
     postBody.value = postId.description;
@@ -109,7 +109,7 @@ function updatePost() {
   const updateListPost = container.querySelector("#addUpdatePost");
   if (updateListPost) {
     updateListPost.addEventListener("click", function () {
-      let postIdToUpdate = window.localStorage.getItem(id)
+      let postIdToUpdate = localStorage.getItem('id')
       const title = container.querySelector("#postTitle").value;
       const description = container.querySelector("#postBody").value;
       // Obtengo el parámetro de la url :ID
@@ -117,6 +117,7 @@ function updatePost() {
       // let id = substr.split("=")[1];
       if (title || description) {
         editPost(postIdToUpdate, title, description);
+        localStorage.removeItem("id");
         setTimeout(() => {
           window.location.href = "/publications";
         }, 1000);
