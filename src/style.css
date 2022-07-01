@@ -191,7 +191,7 @@ h2 {
   font-family: 'Kite One', regular;
   width:10%;
   height:9%;
-  transition:4s all;
+  transition: 1s all;
   z-index:1;
   max-width: 250px;
   display: flex;
@@ -205,13 +205,13 @@ h2 {
 }
 
 #navMenu li{
-    transition:.3s all;
+    transition: 1s all;
 }
 
 #navMenu a{
   text-decoration: none;
   list-style: none;
-  transition: .3s all;
+  transition: 1s all;
   font-size:0px;
   padding: 0px;
   

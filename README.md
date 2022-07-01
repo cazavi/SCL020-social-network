@@ -1,4 +1,5 @@
 # SOCIAL NETWORK
+Puedes ver el proyecto terminado [aquí](https://socialnetworkplantgram.netlify.app/)
 
 ## TEMA
 Decidimos hacer una red social dirigida al usuario plant lover.
@@ -62,3 +63,5 @@ Ver prototipo con interacciones [aquí](https://www.figma.com/proto/oGMhwqudUs2Y
 * Tuvimos varios problemas con las funciones de like post por ids y temas de firestore.
 * Pudimos solucionar el cambiar la imagen del like al dar y quitar like.
 * La edición y actualización de post quedó funcional.
+* Agregamos likesSum como un propiedad de los post para agregarlo a un spam con un contador y logramos con ello contar los likes.
+* No pudimos resolver problemas con mock tests por falta de tiempo con coaches, pero logramos al menos una parte de ellos.
