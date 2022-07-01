@@ -102,7 +102,7 @@ function publications() {
                 ${resultLikes.includes(auth.currentUser.uid)? `<img id="like-${doc.id}" width="25" src="./assets/like.png">` : `<img id="like-${doc.id}" width="25" src="./assets/dislike.png">` }
               </picture>
             </div>
-            <a class="btnUpdatePost" id="btnUpdate-${doc.id}" href="/updatePost?id${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></a>
+            <button class="btnUpdatePost" id="btnUpdate-${doc.id}"><img width="18" class="editButton" src="../assets/edit.png"></button>
             <button  class="open-modal btnDeletePost" data-open="modal1" ><img width="20" class="deleteButton" src="../assets/delete.png"></button>
             </div>
           </div>
@@ -150,8 +150,9 @@ function publications() {
       btnUpdatePost.forEach((btnUpdate) => {
         btnUpdate.addEventListener('click', (event) => {
         const id = btnUpdate.id.split('-')[1]
-          let idPost = container.getElementsById(id).value;
-          window.localStorage.setItem('id', idPost);
+          // let idPost = container.getElementsById(id).value;
+          console.log(id)
+          localStorage.setItem('id', id);
           // const id = btnUpdate.id.split('-')[1]
           // id.window.location.pathname;
           // if (id) {

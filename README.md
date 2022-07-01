@@ -61,3 +61,4 @@ Ver prototipo con interacciones [aquí](https://www.figma.com/proto/oGMhwqudUs2Y
 * Añadimos otro template para redirigir el edit posts.
 * Tuvimos varios problemas con las funciones de like post por ids y temas de firestore.
 * Pudimos solucionar el cambiar la imagen del like al dar y quitar like.
+* La edición y actualización de post quedó funcional.
